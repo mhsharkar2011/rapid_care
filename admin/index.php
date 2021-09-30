@@ -11,6 +11,7 @@ include("class/function.php");
 //     header("location:dashboard.php");
 // }
 ?>
+
 <?php include_once "includes/head.php" ?>
 
 <body class="bg-primary">

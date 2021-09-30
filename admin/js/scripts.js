@@ -20,12 +20,15 @@
     });
 })(jQuery);
 
+/**
+ * User Add/Edit ------------------------------------
+ * 
+ */
 $(document).ready(function(){
-    // Add/Edit User
     $(documnet).on("submit","#addform", function(event){
         event.preventDefault();
         $.ajax({
-            url:"/rapid/admin/employee.php/ajax.php",
+            url:"/rapid/admin/ajax.php",
             type:"POST",
             datatype:"json",
             data: new FormData(this),

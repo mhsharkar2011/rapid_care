@@ -1,14 +1,16 @@
 <!-- // if(isset($success)) {echo"<script>alert('$success')</script>";} -->
-<?php include_once 'includes/head.php'; ?>
-<?php include_once 'class/function.php';
-    $objAdmin = new AdminBoard();
+
+<?php require_once 'connection.php';
+    $db = new Database();
+    var_dump($db);
 ?>
 
-
-
+<!-- <?php include_once 'includes/head.php'; ?> -->
 <body>
     <div class="container my-4 p-4 shadow table-responsive">
         <div class="title row mb-4" style="text-align: center;color:cornflowerblue"><h1>Rapid Employee</h1></div>
+
+        <?php echo "Hello"; ?>
 <!--------------------------Add Empolyee Button Start------------------------>
         <div class="row mb-3">
                 <?php require_once 'form.php'; ?>
@@ -33,8 +35,12 @@
                 <li class="page-item"><a class="page-link" href="#">Next</a></li>
             </ul>
         </nav>
+
+        <?php echo "Hello"; ?>
         <!---------------------- Pagination End ----------------------->
     </div>
 
 <?php include_once "includes/scripts.php" ?>
 </body>
+
+

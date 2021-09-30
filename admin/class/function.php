@@ -1,6 +1,4 @@
 <?php 
- include_once 'connection.php';
-
  class AdminBoard extends Database
  {
      protected $tablename = 'tbl_employee';
@@ -23,8 +21,8 @@
         try {
             $this->conn->beginTransaction();
             $stmt->execute($data);
-            $this->conn->commit();
             $lastInsertedId = $this->conn->lastInsertId();
+            $this->conn->commit();
             return $lastInsertedId;
         } catch (PDOException $e) {
             echo "Error:" . $e->getMessage();
@@ -42,7 +40,7 @@
         $sql = "SELECT * FROM {$this->tablename} ORDER BY id DESC LIMIT {$start},{$limit}";
         $stmt = $this->conn->prepare($sql);
         $stmt -> execute();
-        if($stmt->rowCount()>0){
+        if($stmt->rowCount() > 0){
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }else{
             $results = [];
@@ -57,10 +55,10 @@
  */
      public function getRow($field,$value)
      {
-         $sql = "SELECT * FROM {$this->tablename} WHERE {$field}=:{$value}";
+         $sql = "SELECT * FROM {$this->tablename} WHERE {$field}=:{$field}";
          $stmt = $this->conn->prepare($sql);
          $stmt->execute(["{:$field}"=> $value]); //$fields may be use here
-         if($stmt->rowCount()>0){
+         if($stmt->rowCount() > 0){
              $result = $stmt->fetch(PDO::FETCH_ASSOC);
          }else{
              $result = [];
@@ -94,5 +92,3 @@
      }
 
  }
- 
- ?>

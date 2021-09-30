@@ -13,7 +13,7 @@
             </div>
             <div class="modal-body">
                 <div class="card-body">
-                    <form action="" method="POST" enctype="multipart/form-data">
+                    <form id="addform" action="" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <input type="text" name="emp_name" id="emp_name" class="form-control" placeholder="Enter Full Name">
                         </div>
