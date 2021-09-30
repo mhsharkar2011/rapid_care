@@ -1,5 +1,7 @@
 <?php
-include("class/function.php");
+// include("class/function.php");
+
+
 //$obj = new AdminBoard();
 
 // if (isset($_POST['admin_login'])) {

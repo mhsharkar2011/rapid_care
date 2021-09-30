@@ -55,6 +55,7 @@
                             <input type="file" name="user_img" id="user_file"/>
                         </div>
                         <div class="modal-footer">
+                            
                             <input type="button" value="Close" class="btn btn-danger" data-bs-dismiss="modal">
                             <input type="submit" value="ADD" name="submit" class="btn btn-primary" data-bs-dismiss="modal">
                         </div>

@@ -1,7 +1,7 @@
 <?php 
 $action = $_REQUEST['action'];
 if(!empty($action)){
-    require_once 'class/connection.php';
+    require_once 'database/connection.php';
     $obj = new AdminBoard();
 }
 if($action == 'adduser' && !empty($_POST)){

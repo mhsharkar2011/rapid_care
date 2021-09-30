@@ -1,4 +1,6 @@
-<?php 
+<?php  
+include_once "database/connection.php";
+
  class AdminBoard extends Database
  {
      protected $tablename = 'tbl_employee';
