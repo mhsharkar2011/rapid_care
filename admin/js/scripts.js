@@ -44,3 +44,29 @@ $(document).ready(function(){
         });
     });
 });
+
+function readRecords(){
+    var readrecord = "readrecord";
+    $.ajax({
+        url:"employee.php",
+        type:"post",
+        data:{readrecord:readrecord},
+        success:function(data,status){
+            $('#records_contant').html(data);
+        }
+    });
+}
+function Deleteuser(deleteid){
+    var conf =confirm("Are you sure" );
+    if(conf == true){
+        $.ajax(
+            {
+                url:"employeestable.php",
+                type:"post",
+                data:{deleteid:deleteid},
+                success:function(data,status){
+                    readRecords();
+                }
+            });
+    }
+}

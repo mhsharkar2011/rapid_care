@@ -25,7 +25,7 @@
                         <div class="form-group">
                             <input type="email" name="emp_email" id="emp_email" class="form-control" placeholder="Enter email address" value="<?php if(isset($emp_email)){ echo  $emp_email;} ?>" />
                         </div>
-                        <!-- <div class="form-group">
+                        <div class="form-group">
                             <span class="" style="margin-right: 40px;">Gender</span>
                             <input type="radio" name="gender" value="Male" id="male" class="form-check-input"   >
                             <label class="form-check-label" style="margin-right: 30px;" for="male">
@@ -35,7 +35,7 @@
                             <label class="form-check-label" for="female">
                                 Female
                             </label>
-                        </div> -->
+                        </div>
                         <div class="form-group">
                             <input type="text" name="emp_age" id="emp_age" class="form-control"  placeholder="Enter Age" value="<?php if(isset($emp_age)){ echo  $emp_age;} ?>" />
                         </div>
@@ -50,14 +50,14 @@
                         <div class="form-group">
                             <input type="text" name="emp_phone" id="empphone" class="form-control" placeholder="Enter Phone" value="<?php if(isset($emp_phone)){ echo  $emp_phone;} ?>" />
                         </div>
-                        <!-- <div>
+                        <div>
                             <input type="file" name="emp_img" id="user_file"/>
-                        </div> -->
+                        </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                             <!-- <button type="button" class="btn btn-success" id="addButton" data-bs-dismiss="modal">Submit</button> -->
                             <!-- <input type="hidden" name="userid" value="adduser"> -->
-                            <input type="submit" class="btn btn-primary" name="userid"  value="Save">
+                            <input type="submit" class="btn btn-primary" name="inser_btn"  value="Save">
                         </div>
                     </form>
                 </div> 
