@@ -28,7 +28,7 @@ $(document).ready(function(){
     $(documnet).on("submit","#addform", function(event){
         event.preventDefault();
         $.ajax({
-            url:"programming_point/rapid_care/admin/ajax.php",
+            url:"/programming_point/rapid_care/admin/ajax.php",
             type:"POST",
             datatype:"json",
             data: new FormData(this),
