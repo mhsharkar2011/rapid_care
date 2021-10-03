@@ -11,7 +11,7 @@
         }
         
     } catch (PDOException $e) {
-        echo $insert_query. "Database Connection faild: ". $e->getMessage();
+        echo "Database Connection faild: ". $e->getMessage();
     }
 
 ?>
