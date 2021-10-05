@@ -24,3 +24,57 @@
  * User Add/Edit ------------------------------------
  * 
  */
+
+ / function readRecords(){
+    //     var readrecord = "readrecord";
+    //     $.ajax({
+    //         url:"insert_employee_data.php",
+    //         type:"POST",
+    //         data:{readrecord : readrecord},
+    //         success:function(data,status){
+    //             $('#').html(data);
+    //         }
+    //     });
+    // }
+    
+    function addRecord(){
+        var emp_name = $('#emp_name').val();
+        var emp_position = $('#emp_position').val();
+        var emp_email = $('#emp_email').val();
+        var male = $('#male').val();
+        var female = $('#female').val();
+        var emp_age = $('#emp_age').val();
+        var doj = $('#doj').val();
+        var emp_salary = $('#emp_salary').val();
+        var emp_phone = $('#emp_phone').val();
+        // var emp_img = $('#emp_img').val();
+    
+        $.ajax({
+            url:".php",
+            type:"POST",
+            dataType:"JSON",
+            data:{
+                    emp_name : emp_name,
+                    emp_position : emp_position,
+                    emp_email : emp_email,
+                    male : male,
+                    female : female,
+                    emp_age : emp_age,
+                    doj : doj,
+                    emp_salary : emp_salary,
+                    emp_phone : emp_phone,
+                    // emp_img : emp_img
+            },
+            processData:false,
+            contentType:false,
+            beforeSend:function(){
+                console.log("Wait....");
+            },
+            success:function(response){
+                console.log(response);
+            },
+            error:function(){
+                console.log("Oops");
+            },
+        });
+    }

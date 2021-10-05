@@ -1,3 +1,4 @@
+
 <!------------------------ Add Empolyee Button End ------------------->
 <div class="col-lg-6">
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#insertModal">Add New <i class="fas fa-user-circle"></i>
@@ -14,54 +15,56 @@
             </div>
             <div class="modal-body">
                 <div class="card-body">
-                    <form id="addform" action="employee.php" method="POST" enctype="multipart/form-data">
+                    <!-- <form id="" action="" method="POST" enctype="multipart/form-data"> -->
                         <div class="form-group">
-                            <input type="text" name="emp_name" id="emp_name" class="form-control" placeholder="Enter Full Name" 
-                            value="<?php if (isset($emp_name)) {echo $emp_name;}?>" />
+                            <input type="text" name="" id="emp_name" class="form-control" placeholder="Enter Full Name" 
+                            value="" />
                             </div>
                         <div class="form-group">
-                            <input type="text" name="emp_position" id="emp_position" class="form-control" placeholder="Enter Position" 
-                            value="<?php if (isset($emp_position)) {echo  $emp_position;} ?>" />
+                            <input type="text" name="" id="emp_position" class="form-control" placeholder="Enter Position" 
+                            value="" />
                         </div>
                         <div class="form-group">
-                            <input type="email" name="emp_email" id="emp_email" class="form-control" placeholder="Enter email address" 
-                            value="<?php if (isset($emp_email)) {echo  $emp_email;} ?>" />
+                            <input type="email" name="" id="emp_email" class="form-control" placeholder="Enter email address" 
+                            value="" />
                         </div>
                         <div class="form-group">
                             <span class="" style="margin-right: 40px;">Gender</span>
-                            <input type="radio" name="gender" value="Male" id="male" class="form-check-input">
+                            <input type="radio" name="" value="Male" id="male" class="form-check-input">
                             <label class="form-check-label" style="margin-right: 30px;" for="male">Male</label>
-                            <input type="radio" name="gender" value="Female" id="female" class="form-check-input">
+                            <input type="radio" name="" value="Female" id="female" class="form-check-input">
                             <label class="form-check-label" for="female">Female</label>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="emp_age" id="emp_age" class="form-control" placeholder="Enter Age" 
-                            value="<?php if (isset($emp_age)) {echo  $emp_age;} ?>" />
+                            <input type="text" name="" id="emp_age" class="form-control" placeholder="Enter Age" 
+                            value="" />
                         </div>
                         <div class="form-group">
                             <label class="small mb-1" for="doj">Date of Join</label>
-                            <input type="date" name="doj" id="doj" class="form-control" 
-                            value="<?php if (isset($doj)) {echo  $doj;} ?>" />
+                            <input type="date" name="" id="doj" class="form-control" 
+                            value="" />
                         </div>
                         <div class="form-group">
                             <label class="small mb-1" for="emp_salary">Salary</label>
-                            <input type="number" name="emp_salary" id="emp_salary" class="form-control" 
-                            value="<?php if (isset($emp_salary)) {echo  $emp_salary;} ?>" />
+                            <input type="number" name="" id="emp_salary" class="form-control" 
+                            value="" />
                         </div>
                         <div class="form-group">
-                            <input type="text" name="emp_phone" id="empphone" class="form-control" placeholder="Enter Phone" 
-                            value="<?php if (isset($emp_phone)) {echo  $emp_phone;} ?>" />
+                            <input type="text" name="" id="emp_phone" class="form-control" placeholder="Enter Phone" 
+                            value="" />
                         </div>
-                        <div>
-                            <input type="file" name="emp_img" id="user_file">
-                        </div>
+                        <!-- <div>
+                            <input type="file" name="" id="emp_img">
+                        </div> -->
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                            <input type="submit" class="btn btn-primary" name="inser_btn" value="Save">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="addRecord()">Save</button>
                         </div>
-                    </form>
+                    
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
