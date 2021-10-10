@@ -1,0 +1,110 @@
+/* Top Part */
+#top-bar{
+    background:#4285f4;
+    padding: 5px;
+}
+.marquee {
+    width: 80%;
+    height:20PX;
+    float: left;
+    overflow: hidden;
+    position: relative;
+    color:white;
+}
+.marquee p {
+    position: absolute;
+    width: 50%;
+    margin: 0;
+    font-size: 24px;
+    line-height: 20px;
+    text-align: center;
+    -moz-transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+    -moz-animation: scroll-left 2s linear infinite;
+    -webkit-animation: scroll-left 2s linear infinite;
+    animation: scroll-left 20s linear infinite;
+}
+@-moz-keyframes scroll-left {
+    0% {
+        -moz-transform: translateX(100%);
+    }
+    100% {
+        -moz-transform: translateX(-100%);
+    }
+}
+
+@-webkit-keyframes scroll-left {
+    0% {
+        -webkit-transform: translateX(100%);
+    }
+    100% {
+        -webkit-transform: translateX(-100%);
+    }
+}
+
+@keyframes scroll-left {
+    0% {
+        -moz-transform: translateX(100%);
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+    }
+    100% {
+        -moz-transform: translateX(-100%);
+        -webkit-transform: translateX(-100%);
+        transform: translateX(-100%);
+    }
+}
+.right-item a{
+    float: left;
+    color: white;
+}
+.right-item a:hover{
+    float: left;
+    color: orange;
+}
+.right-item i{
+    margin-left: 15px;
+    font-size: 28px;
+}
+/* ------------End------------ */
+#navbar{
+    background: #4285f4;
+    z-index: 99999;
+}
+.navbar{
+    box-shadow: none;
+}
+.dropdown-menu{
+    min-width: auto;
+}
+.navbar-nav{
+    display: flex;
+    margin: 0 auto;
+}
+
+.navbar.navbar-dark .breadcrumb .nav-item .nav-link:hover, .navbar.navbar-dark .navbar-nav .nav-item .nav-link:hover {
+    color:#4285f4;
+    background:white;
+    border-radius: 5px;
+}
+
+.sticky{
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background: #000;
+}
+
+.btn {
+	margin-top:0px;
+    margin-left:5px !important;
+    float: left;
+}
+.table td{
+    vertical-align: middle;
+}
+.paginate{
+    width: 30%;
+    margin: 0 auto;
+}
