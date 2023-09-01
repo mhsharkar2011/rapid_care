@@ -1,0 +1,259 @@
+<!------------------------------------------------- UTC TIME -------------------------------------------------->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>UTC Time Example</title>
+  <style>
+    #utc-time,h1 {
+      font-size: 40px;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      color:orangered;
+    }
+  </style>
+</head>
+<body>
+  <h1>UTC Time</h1>
+  <div id="utc-time"></div>
+  <script>
+    function updateLocalTime() {
+      const now = new Date();
+      const utcTime = now.toUTCString(); // UTC time
+      // Time format
+      const years = now.getFullYear().toString().padStart(4, '0');
+      const months = now.getMonth()+1;
+      const dates = now.getDate().toString().padStart(2, '0');
+      const hours = now.getHours().toString().padStart(2, '0');
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      const seconds = now.getSeconds().toString().padStart(2, '0');
+      // Get the timestamp
+      const utcTimeFormatted = `${years}-${months}-${dates} ${hours}:${minutes}:${seconds}`;
+      document.getElementById('utc-time').textContent = utcTime;
+    }
+    updateLocalTime(); // initial call to update the local time
+    setInterval(updateLocalTime, 1000); // update the local time every second
+  </script>
+  <hr />
+</body>
+</html>
+
+<!------------------------------------------------- ISO TIME -------------------------------------------------->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ISO Time Example</title>
+  <style>
+    #iso-time,p{
+      font-size: 40px;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      color:purple;
+      margin-bottom: 20px;
+    }
+    #isoLocal-time,span{
+      font-size: 40px;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      color:blueviolet;
+      margin-top: 20px;
+
+    }
+
+  </style>
+</head>
+<body>
+  <p>ISO Time</p>
+  <div id="iso-time"></div>
+  <hr>
+  <span>ISO Local Time Formated</span>
+  <div id="isoLocal-time"></div>
+  <script>
+    function updateISOTime() {
+      const now = new Date();
+      const isoTime = now.toISOString(); // UTC time
+      const isoTimeFormatted = isoTime.replace('T', ' ').replace('Z', '');
+      // Time format
+      const years = now.getFullYear().toString().padStart(4, '0');
+      const months = now.getMonth()+1;
+      const monthsFormatted = months.toString().padStart(2,'0');
+      const dates = now.getDate().toString().padStart(2, '0');
+      const hours = now.getHours().toString().padStart(2, '0');
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      const seconds = now.getSeconds().toString().padStart(2, '0');
+      // Get the timestamp
+      const isoLocalTimeFormatted = `${years}-${monthsFormatted}-${dates} ${hours}:${minutes}:${seconds}`;
+      
+      document.getElementById('iso-time').textContent = isoTime;  
+      
+      document.getElementById('isoLocal-time').textContent = isoLocalTimeFormatted;  
+    }
+    updateISOTime(); // initial call to update the local time
+    setInterval(updateISOTime, 1000); // update the local time every second
+  </script>
+</body>
+</html>
+
+
+
+<!---------------------------------------------- Current Time ----------------------------------------------->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Current Date</title>
+    <style>
+      #current-time,p1{
+        font-size: 40px;
+        font-weight: bold;
+        font-family: Arial, sans-serif;
+        color:green;
+        /* text-transform: uppercase; */
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body onload="displayDate()">
+    <hr>
+    <p1>Current Date</p1>
+    <br>
+    <p1 id="current-time"></p1>
+  </body>
+  <script>
+    function displayDate() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      const month = monthNames[now.getMonth()]; // getMonth() returns 0-based month (0=January), so we add 1
+      const day = now.getDate();
+      const hour = now.getHours(); // getHours() returns
+      const min = now.getMinutes();
+      const sec = now.getSeconds();
+      const formattedDate = year + "-" + month + "-" + day +" "+ hour+":" + min+":" + sec;
+
+      document.getElementById("current-time").textContent = formattedDate;
+    }
+    displayDate();
+    setInterval(displayDate, 1000);
+  </script>
+  <hr>
+</html>
+
+
+<!---------------------------------------------- New Date & Time ----------------------------------------------->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Current Local Date and Time</title>
+  <style>
+    #new-time,p11{
+      font-size: 40px;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      color:indianred;
+      text-transform:capitalize;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <p11>New dateTime-1</p11>
+	<h1 id="new-time"></h1>
+	<script>
+		function getCurrentTime() {
+			const now = new Date();
+			let year = now.getFullYear();
+			let month = now.getMonth() + 1;
+			let day = now.getDate();
+			let hours = now.getHours();
+			let minutes = now.getMinutes();
+			let seconds = now.getSeconds();
+
+      let am = hours >= 12 ? 'PM' : 'AM';
+                hours %= 12;
+                hours = hours || 12;
+      let formattedTime = year + '-' + month.toString().padStart(2,'0') + '-'+ day + ' ' + hours + ':' + minutes + ':' + seconds + am ;
+
+			// const formattedTime = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')} ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} ${am}`;
+			// return formattedTime;
+      document.getElementById("new-time").textContent = formattedTime;
+		}
+		getCurrentTime();
+    setInterval(getCurrentTime, 1000);
+	</script>
+</body>
+</html>
+
+
+<!---------------------------------------------- New Date & Time-2 ----------------------------------------------->
+<hr>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>New Date and Time</title>
+  <style>
+    #new-2,p2{
+      font-size: 40px;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      color:green;
+      text-transform:capitalize;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <p2>New dateTime-2</p2>
+	<h1 id="new-2"></h1>
+
+<script>
+function datetime(){
+const now = new Date();
+let year = now.getFullYear();
+let month = now.getMonth()+1;
+let day = now.getDate();
+let hours = now.getHours();
+let minutes = now.getMinutes();
+let seconds = now.getSeconds();
+let ampm = hours >= 12 ? 'PM' : 'AM';
+hours %= 12;
+hours = hours || 12;
+let timeString = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+console.log(timeString);
+document.getElementById('new-2').textContent = timeString;
+}
+datetime();
+setInterval(datetime, 10);
+
+</script>
+
+</body>
+</html>
+
+
+<!---------------------------------------------- Combine Date & Time ----------------------------------------------->
+<hr>
+<label for="date">Date:</label>
+<input type="date" id="date" name="date">
+
+<label for="time">Time:</label>
+<input type="time" id="time" name="time">
+
+<label for="seconds">Seconds:</label>
+<input type="number" id="seconds" name="seconds" min="0" max="59">
+
+<button onclick="combineDateTime()">Combine Date and Time</button>
+
+<p id="datetime"></p>
+
+<script>
+function combineDateTime() {
+  const date = document.getElementById("date").value;
+  const time = document.getElementById("time").value;
+  const seconds = document.getElementById("seconds").value;
+  const datetime = new Date(date + " " + time + ":" + seconds);
+  const datetimeString = datetime.toLocaleString();
+  document.getElementById("datetime").textContent = datetimeString;
+}
+</script>
+<hr>
+
+
