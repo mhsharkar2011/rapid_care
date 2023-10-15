@@ -26,7 +26,7 @@ class DashboardController extends Controller
         $data['totalPatients'] = Patient::all()->count();
         $data['totalAppointments'] = Appointment::all()->count();
         $data['totalEmployees'] = User::with('employee')->where('status','Active')->whereHas('employee',function($q){
-            $q->where('type','employee');
+            $q->where('roles','employee');
         })->count();
         $data['totalActiveAppointments'] = Appointment::where('status','Active')->count();
         return view('admin.dashboard', $data);

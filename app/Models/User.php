@@ -88,21 +88,21 @@ class User extends Authenticatable
         parent::boot();
     
         static::created(function ($user) {
-            if ($user->type == 'Employee') {
+            if ($user->roles == 'Employee') {
                 $employee = new Employee();
                 $employee->user_id = $user->id;
                 $employee->name = $user->name;
                 $employee->save();   
             }
 
-            if ($user->type == 'Patient') {
+            if ($user->roles == 'Patient') {
                 $patient = new Patient();
                 $patient->user_id = $user->id;
                 $patient->name = $user->name;
                 $patient->save();
             }
 
-            if ($user->type == 'Doctor') {
+            if ($user->roles == 'Doctor') {
                 $doctor = new Doctor();
                 $doctor->user_id = $user->id;
                 $doctor->name = $user->name;

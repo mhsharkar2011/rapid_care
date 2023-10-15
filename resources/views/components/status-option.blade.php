@@ -1,5 +1,5 @@
-@props(['value', 'text', 'selected' => false])
+@props(['value', 'name', 'selected' => false])
 
 <option value="{{ $value }}" {{ $selected ? 'selected' : '' }}>
-    {{ $text }}
+    {{ $name }}
 </option>

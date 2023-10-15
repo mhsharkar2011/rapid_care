@@ -44,12 +44,14 @@ th,td{
                         <td>{{ ++$id }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
-                        @if ($user->type == 'PATIENT')
-                        <td class="text-success">{{ $user->type }}</td>
-                        @elseif ($user->type == 'DOCTOR')
-                        <td class="text-info">{{ $user->type }}</td>
+                        @if ($user->roles == 'Patient')
+                        <td class="text-success">{{ "PATIENT" }}</td>
+                        @elseif ($user->roles == 'Doctor')
+                        <td class="text-primary">{{ "DOCTOR" }}</td>
+                        @elseif ($user->roles == 'Employee')
+                        <td class="text-danger">{{ "EMPLOYEE" }}</td>
                         @else
-                        <td class="text-danger">{{ $user->type }}</td>
+                        <td class="text-secondary">{{ "No Data Found" }}</td>
                         @endif
                         <td>
                             <form action="{{ route('admin.users.update-status', $user->id) }}" method="POST">
@@ -57,18 +59,18 @@ th,td{
                                 @method('PUT')
                                     <div>
                                         <select style="display:none" name="status" id="status" class="badge bg-inverse-primary ml-2">
-                                            @if ($user->status == 'ACTIVE')
+                                            @if ($user->status == 'active')
                                             <div class=" badge bg-inverse-success ml-2">
-                                            <option value="INACTIVE" {{ $user->status == 'INACTIVE' ? 'selected' : '' }}></option>
+                                            <option value="inactive" {{ $user->status == 'inactive' ? 'selected' : '' }}></option>
                                             </div>
                                             @else
-                                            <option value="ACTIVE" {{ $user->status == 'ACTIVE' ? 'selected' : '' }}></option>
+                                            <option value="active" {{ $user->status == 'active' ? 'selected' : '' }}></option>
                                             @endif
                                         </select>
                                     </div>
                         
                                 <button type="submit" class="btn">
-                                    @if ($user->status != 'ACTIVE')
+                                    @if ($user->status != 'active')
                                     <span class="text-warning">INACTIVE</span>
                                     @else
                                     <span class="bg-inverse-dark text-success">ACTIVE</span>

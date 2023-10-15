@@ -12,7 +12,7 @@ class EmployeeController extends Controller
     {
         $pageLimit = $request->per_page ?? 5;
         $data['employees'] = Employee::with('user')->whereHas('user',function($q){
-            $q->where('type','employee');
+            $q->where('roles','patient');
             $q->where('status','ACTIVE');
         })->latest()->paginate($pageLimit);
         return view('admin.employees.index',$data)->with('id',(request()->input('page', 1) - 1) * $pageLimit);

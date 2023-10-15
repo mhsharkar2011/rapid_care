@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Card;
 use App\Models\Doctor;
+use App\Models\Patient;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -63,7 +65,7 @@ class UserController extends Controller
         $patient = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'type' => $request->input('type'),
+            'roles' => $request->input('roles'),
             'status' => $request->input('status'),
             'password' => Hash::make($request->input('password')),
         ]);

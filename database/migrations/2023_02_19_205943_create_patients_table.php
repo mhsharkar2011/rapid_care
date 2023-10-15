@@ -1,7 +1,5 @@
 <?php
 
-use App\Enums\Status;
-use App\Enums\Type;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,10 +17,10 @@ class CreatePatientsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('name')->nullable();
+            $table->string('phone',20)->nullable();
             $table->string('gender')->nullable();
             $table->string('avatar')->nullable();
             $table->date('dob')->nullable();
-            $table->string('phone',20)->nullable();
             $table->string('job',100)->nullable();
             $table->string('address',120)->nullable();
             $table->string('city',20)->nullable();
