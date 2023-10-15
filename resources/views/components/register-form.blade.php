@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-      <div class="col-md-8 col-md-6 col-lg-7 mx-auto" style="margin-top: 10rem !important;">
+      <div class="col-md-8 col-md-6 col-lg-7 mx-auto">
         <div class="card card-signin my-5">
             <div class="card-header text-center text-uppercase text-primary">{{ __('Register') }}</div>
             <div class="card-body mx-3">

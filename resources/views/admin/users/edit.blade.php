@@ -29,7 +29,7 @@
                     <td>
                         <x-status-select name="status" id="status" class="form-control">
                             <x-status-option value="Active" name="Active" :selected="$user->status == 'Active'" />
-                            <x-status-option value="Inactive" :selected="$user->status == 'Inactive'" />
+                            <x-status-option value="Inactive" name="Inactive" :selected="$user->status == 'Inactive'" />
                         </x-status-select>
                         
                     </td>

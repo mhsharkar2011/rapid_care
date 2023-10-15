@@ -12,7 +12,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class Patient extends Authenticatable
 {
-    use HasFactory,HasApiTokens, Notifiable, HasRoles;
+    use HasFactory,HasApiTokens, Notifiable;
 
     protected $table = 'patients';
 
