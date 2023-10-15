@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Category;
 use App\Enums\Status;
 use App\Enums\Type;
 use Carbon\Carbon;
@@ -21,7 +22,7 @@ class CreateCardsTable extends Migration
             $table->string('card_no');
             $table->foreignId('created_by')->nullable()->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('title')->nullable();
-            $table->enum('type',[Type::NORMAL,Type::VIP])->default('NORMAL');
+            $table->enum('type',[Category::BRONZE,Category::SILVER, Category::GOLD])->default('Bronze');
             $table->enum('status',[Status::ACTIVE,Status::INACTIVE])->default('ACTIVE');
             $table->date('expire_date')->default(Carbon::now()->addYears(5));
             $table->timestamps();

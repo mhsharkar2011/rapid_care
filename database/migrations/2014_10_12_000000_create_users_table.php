@@ -1,7 +1,7 @@
 <?php
 
+use App\Enums\Roles;
 use App\Enums\Status;
-use App\Enums\Type;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -22,8 +22,8 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('otp_code')->nullable()->unique();
-            $table->enum('status',[Status::ACTIVE, Status::INACTIVE])->default('ACTIVE');
-            $table->enum('type',[Type::PATIENT, Type::EMPLOYEE, Type::DOCTOR]);
+            $table->enum('status',[Status::ACTIVE, Status::INACTIVE])->default('active');
+            $table->string('roles')->default('patient');
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

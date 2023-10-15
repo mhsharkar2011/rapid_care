@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
         $users = [
             [
                 'name' => 'Dr. SM Samsur Rahman',
-                'type' => 'DOCTOR',
+                'roles' => 'DOCTOR',
                 'email' => 'samsu@gmail.com',
                 'email_verified_at' => now(),
                 'password' => Hash::make('123456'),//'password
@@ -29,7 +29,7 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'name' => 'Dr. Munni',
-                'type' => 'DOCTOR',
+                'roles' => 'DOCTOR',
                 'email' => 'munni@gmail.com',
                 'email_verified_at' => now(),
                 'password' => Hash::make('123456'),//'password

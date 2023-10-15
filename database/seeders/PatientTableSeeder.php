@@ -15,20 +15,6 @@ class PatientTableSeeder extends Seeder
      */
     public function run()
     {
-
-        $patients = [
-            [
-                'user_id'=>1,
-                'name'=>'Samsur Rahman',
-            ],
-            [
-                'user_id'=>2,
-                'name'=>'Munni',
-            ]
-        ];
-
-        foreach ($patients as $patient) {
-            Patient::create($patient);
-        }
+        // 
     }
 }
