@@ -146,12 +146,12 @@ class UserController extends Controller
     public function updateStatus(Request $request, User $user)
     {
             $status = $request->status;
-            if($status == 'ACTIVE' || $status == 'INACTIVE'){
+            if($status == 'Active' || $status == 'Inactive'){
             $user->status = $status;
             $user->save();
                 return redirect()->back()->with('status', 'Status has been updated.');
             }else{
-                return redirect()->with('error','Invalid Status');
+                return redirect()->back('error','Invalid Status');
         }
     }
 

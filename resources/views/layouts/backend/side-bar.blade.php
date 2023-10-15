@@ -8,8 +8,6 @@
         </li>
         {{-- User Menu --}}
         @auth
-          
-        @unlessrole('does not have this role')
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-fw fa-folder"></i>
@@ -46,8 +44,6 @@
             <i class="fa-solid fa-user-group"></i>
             <span>Setting</span></a>
         </li>
-
-        @endrole
         @endauth
       </ul>
 

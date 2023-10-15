@@ -5,11 +5,6 @@
 @endsection
 
 @section('content')
-<style>
-td{
-    padding: 4px !important;
-}
-</style>
     <div class="row mt-5">
         <div class="col-md-6 offset-md-3">
             <h3 class="text text-center text-primary">Update {{ $user->name }}</h3>
@@ -33,8 +28,8 @@ td{
                     <td>Status</td>
                     <td>
                         <x-status-select name="status" id="status" class="form-control">
-                            <x-status-option value="ACTIVE" text="ACTIVE" :selected="$user->status == 'ACTIVE'" />
-                            <x-status-option value="INACTIVE" text="INACTIVE" :selected="$user->status == 'INACTIVE'" />
+                            <x-status-option value="Active" name="Active" :selected="$user->status == 'Active'" />
+                            <x-status-option value="Inactive" :selected="$user->status == 'Inactive'" />
                         </x-status-select>
                         
                     </td>

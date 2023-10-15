@@ -5,21 +5,16 @@
 @endsection
 
 @section('content')
-<style>
-td{
-    padding: 4px !important;
-}
-</style>
 <div class="container">
     <div class="row">
-      <div class="col-md-8 col-md-6 col-lg-7 mx-auto" style="margin-top: 10rem !important;">
-        <div class="card card-signin my-5">
+      <div class="col-md-9 col-md-6 col-lg-9 mx-auto">
+        <div class="card card-signin">
             <div class="card-header text-center text-uppercase text-primary">{{ __('Register') }}</div>
-            <div class="card-body mx-3">
+            <div class="card-body">
                 <form class="form-group" method="POST" action="{{ route('admin.users.store') }}">
                     @csrf
                 <div class="text-end">
-                    <div class="form-group row my-4">
+                    <div class="form-group row">
                         <label for="name" class="col-md-3 col-form-label text-md-right">{{ __('Name') }}</label>
                         <div class="col-md-6">
                             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -31,7 +26,7 @@ td{
                         </div>
                     </div>
 
-                    <div class="form-group row my-4">
+                    <div class="form-group row ">
                         <label for="email" class="col-md-3 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                         <div class="col-md-6">
@@ -67,17 +62,17 @@ td{
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="type" class="col-md-3 col-form-label text-md-right">{{ __('Type') }}</label>
+                        <label for="roles" class="col-md-3 col-form-label text-md-right">{{ __('Roles') }}</label>
                         <div class="col-md-6">
-                            <select name="type" id="" class="form-control">
+                            <select name="roles" id="roles" class="form-control">
                                 @foreach ($roles as $role )
-                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                    <option value="{{ $role->name }}">{{ $role->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="type" class="col-md-3 col-form-label text-md-right">{{ __('Type') }}</label>
+                        <label for="status" class="col-md-3 col-form-label text-md-right">{{ __('Status') }}</label>
                         <div class="col-md-6">
                             <select name="status" id="" class="form-control">
                                 <option value="Active">Acitve</option>
