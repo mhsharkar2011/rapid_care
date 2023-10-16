@@ -18,7 +18,10 @@ class PatientController extends Controller
     public function index(Request $request)
     {
         $pageLimit = $request->per_page ?? 4;
-        $data['patients'] = Patient::with('user','card')->latest()->paginate($pageLimit);
+        $data['patients'] = Patient::with('user', 'card')->whereHas('user', function ($q) {
+            $q->where('roles', 'Patient');
+            $q->where('status', 'ACTIVE');
+        })->latest()->paginate($pageLimit);
         return view('admin.patients.index', $data);
     }
 
@@ -29,8 +32,7 @@ class PatientController extends Controller
      */
     public function create()
     {
-        
-            return view('admin.patients.create');
+        return view('admin.patients.create');
     }
 
     /**
@@ -47,6 +49,7 @@ class PatientController extends Controller
         $patient->dob = $request->input('dob');
         $patient->address = $request->input('address');
         $patient->user_id = auth()->user()->id;
+        $patient->card_id = auth()->user()->id;
         $patient->save();
 
         return redirect()->route('admin.patients.index')->with('success', 'Patient Added Successfully');
@@ -88,21 +91,22 @@ class PatientController extends Controller
         return view('admin.patient.index');
     }
 
-    public function calPatient(){
+    public function calPatient()
+    {
         $data['patients'] = Patient::all();
         $data['totalPatients'] = Patient::all()->count();
-        return view('admin.patients.calPatient',$data);
+        return view('admin.patients.calPatient', $data);
     }
 
     public function updateStatus(Request $request, Patient $patient)
     {
-            $status = $request->status;
-            if($status == 'ACTIVE' || $status == 'INACTIVE'){
+        $status = $request->status;
+        if ($status == 'ACTIVE' || $status == 'INACTIVE') {
             $patient->status = $status;
             $patient->save();
-                return redirect()->back()->with('status', 'Status has been updated.');
-            }else{
-                return redirect()->with('error','Invalid Status');
+            return redirect()->back()->with('status', 'Status has been updated.');
+        } else {
+            return redirect()->with('error', 'Invalid Status');
         }
     }
 }

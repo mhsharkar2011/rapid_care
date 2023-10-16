@@ -36,7 +36,7 @@ class Patient extends Authenticatable
 
     public function card()
     {
-        return $this->belongsTo(Card::class,'id');
+        return $this->hasOne(Card::class,'created_by');
     }
 
     public function appointments()
@@ -49,15 +49,15 @@ class Patient extends Authenticatable
     {
         parent::boot();
     
-        static::created(function ($patient) {
-                $cardNo = 'RHC' . str_pad($patient->id, 6, '0', STR_PAD_LEFT);
-                // $this->card()->create(['card_no' => $cardNo]);
+        // static::created(function ($patient) {
+        //         $cardNo = 'RHC' . str_pad($patient->id, 6, '0', STR_PAD_LEFT);
+        //         // $this->card()->create(['card_no' => $cardNo]);
 
-                $card = new Card();
-                $card->card_no = $cardNo;
-                $card->created_by = $patient->id;
-                $card->save();
+        //         $card = new Card();
+        //         $card->card_no = $cardNo;
+        //         $card->created_by = $patient->id;
+        //         $card->save();
 
-        });
+        // });
     }
 }

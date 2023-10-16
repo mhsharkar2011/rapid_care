@@ -14,7 +14,6 @@ th,td{
 </style>
     <div class="mt-5 text-center">
         <p><button class="btn btn-primary mr-5" id="patientCalBtn">Patient Statistics</button>
-            {{-- <a href="{{ route('admin.patients.create') }}" class="btn btn-primary ml-5">Add New Patient</a> --}}
         </p>
         
     </div>

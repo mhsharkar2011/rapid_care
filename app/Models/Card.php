@@ -26,7 +26,7 @@ class Card extends Model
     
     public function patient()
     {
-        return $this->belongsTo(Patient::class,'created_by');
+        return $this->belongsTo(Patient::class,'user_id');
     }
     public function user()
     {

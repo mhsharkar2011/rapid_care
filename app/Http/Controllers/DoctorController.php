@@ -17,7 +17,8 @@ class DoctorController extends Controller
     {
         $pageLimit = $request->per_page ?? 5;
         $data['doctors'] = Doctor::with('user')->whereHas('user',function($q){
-            $q->where('roles','doctor');
+            $q->where('roles','Doctor');
+            $q->where('status','ACTIVE');
         })->latest()->paginate($pageLimit);
         return view('admin.doctors.index',$data)->with('id',(request()->input('page', 1) - 1) * $pageLimit);
     }

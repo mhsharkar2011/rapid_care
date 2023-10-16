@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Roles;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -57,6 +58,11 @@ class User extends Authenticatable
         return $this->hasOne(Patient::class);
     }
 
+    public function roles()
+    {
+        return $this->hasOne(Roles::class);
+    }
+
     public function card()
     {
         return $this->hasOne(Card::class,'created_by');
@@ -88,26 +94,32 @@ class User extends Authenticatable
         parent::boot();
     
         static::created(function ($user) {
-           
+            if($user->roles == "Employee"){
                 $employee = new Employee();
                 $employee->user_id = $user->id;
                 $employee->name = $user->name;
                 $employee->save();   
-            
-
-          
+            }
+            if($user->roles == "Patient"){
                 $patient = new Patient();
                 $patient->user_id = $user->id;
                 $patient->name = $user->name;
                 $patient->save();
+            }
             
-
-          
+            if($user->roles == "Doctor"){
                 $doctor = new Doctor();
                 $doctor->user_id = $user->id;
                 $doctor->name = $user->name;
                 $doctor->save();
-            
+            }
+            if($user){
+                $cardNo = 'RHC' . str_pad($user->id, 6, '0', STR_PAD_LEFT);
+                $card = new Card();
+                $card->card_no = $cardNo;
+                $card->created_by = $user->id;
+                $card->save();
+            }
 
         });
     }
