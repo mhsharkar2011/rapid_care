@@ -28,6 +28,10 @@ class Card extends Model
     {
         return $this->belongsTo(Patient::class,'created_by');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class,'created_by');
+    }
 
     public function appointments()
     {

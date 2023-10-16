@@ -13,16 +13,26 @@
               @method('PUT')
             <table class="table table-borderless">
                 <tr>
+                    <td>Card Number</td>
+                    <td><input type="text" name="card_no" class="form-control" value="{{ $cardNo->card_no }}"></td>
+                </tr>
+                <tr>
                     <td>User Name</td>
                     <td><input type="text" name="name" class="form-control" value="{{ $user->name }}"></td>
                 </tr>
                 <tr>
-                    <td>Phone</td>
-                    <td><input type="text" name="phone" class="form-control" value="{{ $user->phone }}"></td>
-                </tr>
-                <tr>
                     <td>Email</td>
                     <td><input type="email" name="email" class="form-control" value="{{ $user->email }}"></td>
+                </tr>
+                <tr>
+                    <td>Roles</td>
+                    <td>
+                        <x-status-select name="roles" id="roles" class="form-control">
+                            @foreach ($roles as $role)
+                            <x-status-option value="{{ $role->name }}" name="{{ $role->name }}" />
+                            @endforeach
+                        </x-status-select>
+                    </td>
                 </tr>
                 <tr>
                     <td>Status</td>
@@ -31,7 +41,6 @@
                             <x-status-option value="Active" name="Active" :selected="$user->status == 'Active'" />
                             <x-status-option value="Inactive" name="Inactive" :selected="$user->status == 'Inactive'" />
                         </x-status-select>
-                        
                     </td>
                 </tr>
                 <tr>

@@ -29,6 +29,7 @@ th,td{
                 <thead>
                     <tr>
                           <th>User Id </th>
+                          <th>Card No </th>
                           <th>Name </th>
                           <th>Email</th>
                           <th>Role</th>
@@ -42,6 +43,11 @@ th,td{
                     
                     <tr>
                         <td>{{ ++$id }}</td>
+                        @if ($user->card)
+                        <td>{{ $user->card->card_no }}</td>
+                        @else
+                        <td class="text-secondary">{{ "No Card No Found" }}</td>
+                        @endif
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         @if ($user->roles == 'Patient')
@@ -51,7 +57,7 @@ th,td{
                         @elseif ($user->roles == 'Employee')
                         <td class="text-danger">{{ "EMPLOYEE" }}</td>
                         @else
-                        <td class="text-secondary">{{ "No Data Found" }}</td>
+                        <td class="text-secondary">{{ "Roles Not Assign" }}</td>
                         @endif
                         <td>
                             <form action="{{ route('admin.users.update-status', $user->id) }}" method="POST">

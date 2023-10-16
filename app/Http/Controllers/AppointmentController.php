@@ -21,7 +21,7 @@ class AppointmentController extends Controller
         $pageLimit = $request->per_page ?? 5;
         $user_id = auth()->user()->id;
         $data['title'] = "Appointment Details";
-        $data['appointments'] = Appointment::where('patient_id',$user_id)->with('employee','doctor','patient','card')->latest()->paginate($pageLimit);
+        $data['appointments'] = Appointment::where('user_id',$user_id)->with('user','card')->latest()->paginate($pageLimit);
         $data['appointmentsInActives'] = Appointment::where('status','INACTIVE')->with('patient','doctor')->latest()->paginate($pageLimit);
         return view('frontEnd.appointments.index',$data);
     }

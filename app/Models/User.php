@@ -59,7 +59,7 @@ class User extends Authenticatable
 
     public function card()
     {
-        return $this->hasOne(Card::class,'patient_id');
+        return $this->hasOne(Card::class,'created_by');
     }
 
     // public function roles()
@@ -88,26 +88,26 @@ class User extends Authenticatable
         parent::boot();
     
         static::created(function ($user) {
-            if ($user->roles == 'Employee') {
+           
                 $employee = new Employee();
                 $employee->user_id = $user->id;
                 $employee->name = $user->name;
                 $employee->save();   
-            }
+            
 
-            if ($user->roles == 'Patient') {
+          
                 $patient = new Patient();
                 $patient->user_id = $user->id;
                 $patient->name = $user->name;
                 $patient->save();
-            }
+            
 
-            if ($user->roles == 'Doctor') {
+          
                 $doctor = new Doctor();
                 $doctor->user_id = $user->id;
                 $doctor->name = $user->name;
                 $doctor->save();
-            }
+            
 
         });
     }

@@ -26,7 +26,7 @@ class UserController extends Controller
     {
         $pageLimit = $request->per_page ?? 15;
         $data = [];
-        $data['users'] = User::with('doctor','patient','employee')->latest()->paginate($pageLimit);
+        $data['users'] = User::with('doctor','patient','employee','card')->latest()->paginate($pageLimit);
         $data['totalUsers'] = User::all()->count();
         // $data['totalDoctors'] = Doctor::where('role_id','1')->count();
 
@@ -99,7 +99,13 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('admin.users.edit',compact('user'));
+        $roles = Role::all();
+        $cardNo = Card::select('card_no')->where('created_by',$user->id)->first();
+        if($cardNo){
+            return view('admin.users.edit',compact('user','roles','cardNo'));
+        }else{
+            echo "<h1>No Card No Found</h1>";
+        }
     }
 
     /**
