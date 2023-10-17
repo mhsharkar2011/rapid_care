@@ -28,9 +28,11 @@
                     <td>Roles</td>
                     <td>
                         <x-status-select name="roles" id="roles" class="form-control">
-                            @foreach ($roles as $role)
-                            <x-status-option value="{{ $role->name }}" name="{{ $role->name }}" />
-                            @endforeach
+                            <x-status-option value="{{ $user->roles }}" name="{{ $user->roles }} " />
+                            <x-status-option value="Admin" name="Admin" />
+                            <x-status-option value="Doctor" name="Doctor" />
+                            <x-status-option value="Employee" name="Employee" />
+                            <x-status-option value="Patient" name="Patient" />
                         </x-status-select>
                     </td>
                 </tr>

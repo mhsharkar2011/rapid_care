@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Card;
 use App\Models\Patient;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -18,11 +19,16 @@ class PatientController extends Controller
     public function index(Request $request)
     {
         $pageLimit = $request->per_page ?? 4;
-        $data['patients'] = Patient::with('user', 'card')->whereHas('user', function ($q) {
+        if($data['patients'] = Patient::with('user', 'card')->whereHas('user', function ($q) {
             $q->where('roles', 'Patient');
             $q->where('status', 'ACTIVE');
-        })->latest()->paginate($pageLimit);
-        return view('admin.patients.index', $data);
+        })->latest()->paginate($pageLimit) == NULL){
+            return view('admin.patients.index', $data);
+        }else{
+            $data['patients'] = User::all();
+            return view('admin.patients.index', $data);
+
+        }
     }
 
     /**

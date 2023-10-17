@@ -40,10 +40,10 @@ td{
                 <tr>
                     <td>Status</td>
                     <td>
-                        <select name="status" id="forStatus" class="form-control">
-                            <option value="ACTIVE">Active</option>
-                            <option value="INACTIVE">Inactive</option>
-                        </select>
+                        <x-status-select name="status" id="status" class="form-control">
+                            <x-status-option value="ACTIVE" name="ACTIVE" :selected="$employee->status == 'ACTIVE'" />
+                            <x-status-option value="INACTIVE" name="INACTIVE" :selected="$employee->status == 'INACTIVE'" />
+                        </x-status-select>
                     </td>
                 </tr>
                 <tr>

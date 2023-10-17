@@ -3,7 +3,7 @@ namespace App\Enums;
 
 class Category
 {
-    const BRONZE = 'bronze';
-    const SILVER = 'silver';
-    const GOLD   = 'gold';
+    const BRONZE = 'Bronze';
+    const SILVER = 'Silver';
+    const GOLD   = 'Gold';
 }

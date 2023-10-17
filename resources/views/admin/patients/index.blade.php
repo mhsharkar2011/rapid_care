@@ -32,7 +32,7 @@ th,td{
                 <thead>
                     <tr>
                           <th>Patient Id </th>
-                          <th>Card Number </th>
+                          <th>Card No </th>
                           <th>Photo</th>
                           <th>Name</th>
                           <th>Gender</th>
@@ -45,7 +45,6 @@ th,td{
                     </tr>
                 </thead>
                 <tbody>
-                    
                      @foreach ($patients as $patient)
                     <tr>
                         <td class="text-center">{{ $patient->id }}</td>
@@ -62,8 +61,16 @@ th,td{
                            {{ $age }}
                         </td>
                         <td>{{ $patient->phone }}</td>
-                        <td>{{ $patient->user->email }}</td>
-                        <td>{{ $patient->user->status }}</td>
+                        @if ($patient->email != Null)
+                           <td> No Email Found</td>
+                        @else
+                        <td>{{ $patient->user->email }}</td>   
+                        @endif
+                        @if ($patient->status != Null)
+                            <td>No Data Found</td>
+                        @else
+                        <td>{{ $patient->user->status }}</td>   
+                        @endif
                         <td><a href="{{ route('admin.patients.show', $patient->id) }}"> <i class="fas fa-eye text-info"></i></a></td>
                         <td><a href="{{ route('admin.patients.destroy', $patient->id) }}"><i class="fas fa-times-circle text-danger"></i></a></td>
                     </tr>
@@ -73,7 +80,7 @@ th,td{
             
             {{-- <x-pagination links="{{ $patients->links() }}" class="bg-blue-500 text-dark p-4" /> --}}
 
-                {{ $patients->links('components.pagination') }}
+                {{-- {{ $patients->links('components.pagination') }} --}}
 
         </div>
     </div>

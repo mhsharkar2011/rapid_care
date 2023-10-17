@@ -65,9 +65,10 @@
                         <label for="roles" class="col-md-3 col-form-label text-md-right">{{ __('Roles') }}</label>
                         <div class="col-md-6">
                             <select name="roles" id="roles" class="form-control">
-                                @foreach ($roles as $role )
-                                    <option value="{{ $role->name }}">{{ $role->name }}</option>
-                                @endforeach
+                                    <option value="Admin">Admin</option>
+                                    <option value="Doctor">Doctor</option>
+                                    <option value="Employee">Employee</option>
+                                    <option value="Patient">Patient</option>
                             </select>
                         </div>
                     </div>

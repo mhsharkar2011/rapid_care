@@ -41,7 +41,7 @@ class UserController extends Controller
     public function create()
     {
         $data['title'] = "Register Page";
-        $data['roles'] = Role::all();
+        $data['roles'] = User::all();
         return view('admin.users.create',$data);
     }
 
@@ -99,10 +99,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $roles = Role::all();
         $cardNo = Card::select('card_no')->where('created_by',$user->id)->first();
         if($cardNo){
-            return view('admin.users.edit',compact('user','roles','cardNo'));
+            return view('admin.users.edit',compact('user','cardNo'));
         }else{
             echo "<h1>No Card No Found</h1>";
         }

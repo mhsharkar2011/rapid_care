@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('otp_code')->nullable()->unique();
             $table->enum('status',[Status::ACTIVE, Status::INACTIVE])->default('active');
-            $table->string('roles')->default('patient');
+            $table->enum('roles',[Roles::ADMIN,Roles::DOCTOR,Roles::PATIENT,Roles::EMPLOYEE,Roles::USER]);
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

@@ -23,16 +23,6 @@ class Card extends Model
     protected $appends = [
         'is_active',
     ];
-    
-    public function patient()
-    {
-        return $this->belongsTo(Patient::class,'user_id');
-    }
-    public function user()
-    {
-        return $this->belongsTo(User::class,'created_by');
-    }
-
     public function appointments()
     {
         return $this->hasMany(Appointment::class);

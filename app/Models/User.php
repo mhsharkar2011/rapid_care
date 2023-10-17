@@ -58,10 +58,10 @@ class User extends Authenticatable
         return $this->hasOne(Patient::class);
     }
 
-    public function roles()
-    {
-        return $this->hasOne(Roles::class);
-    }
+    // public function roles()
+    // {
+    //     return $this->hasOne(Roles::class);
+    // }
 
     public function card()
     {
@@ -113,14 +113,12 @@ class User extends Authenticatable
                 $doctor->name = $user->name;
                 $doctor->save();
             }
-            if($user){
                 $cardNo = 'RHC' . str_pad($user->id, 6, '0', STR_PAD_LEFT);
                 $card = new Card();
                 $card->card_no = $cardNo;
+                $card->category = 'Bronze';
                 $card->created_by = $user->id;
                 $card->save();
-            }
-
         });
     }
 }

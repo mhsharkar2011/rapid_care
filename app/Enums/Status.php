@@ -4,11 +4,11 @@ namespace App\Enums;
 
 class Status
 {
-    const ACTIVE        = "active";
-    const INACTIVE      = "inactive";
-    const DRAFT         = "draft";
-    const PUBLISHED     = "publish";
-    const UNPUBLISHED   = "unpublish";
-    const REJECTED      = "rejected";
-    const ARCHIVED      = "archived";
+    const ACTIVE        = "Active";
+    const INACTIVE      = "Inactive";
+    const DRAFT         = "Draft";
+    const PUBLISHED     = "Publish";
+    const UNPUBLISHED   = "Unpublish";
+    const REJECTED      = "Rejected";
+    const ARCHIVED      = "Archived";
 }

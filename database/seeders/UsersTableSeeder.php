@@ -18,25 +18,25 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $users = [
-            [
-                'name' => 'Dr. SM Samsur Rahman',
-                'email' => 'samsu@gmail.com',
-                'email_verified_at' => now(),
-                'password' => Hash::make('123456'),//'password
-                'remember_token' => Str::random(10),
-            ],
-            [
-                'name' => 'Dr. Munni',
-                'email' => 'munni@gmail.com',
-                'email_verified_at' => now(),
-                'password' => Hash::make('123456'),//'password
-                'remember_token' => Str::random(10),
-            ],
-        ];
+        // $users = [
+        //     [
+        //         'name' => 'Dr. SM Samsur Rahman',
+        //         'email' => 'samsu@gmail.com',
+        //         'email_verified_at' => now(),
+        //         'password' => Hash::make('123456'),//'password
+        //         'remember_token' => Str::random(10),
+        //     ],
+        //     [
+        //         'name' => 'Dr. Munni',
+        //         'email' => 'munni@gmail.com',
+        //         'email_verified_at' => now(),
+        //         'password' => Hash::make('123456'),//'password
+        //         'remember_token' => Str::random(10),
+        //     ],
+        // ];
 
-        foreach ($users as $user) {
-            User::create($user);
-        }
+        // foreach ($users as $user) {
+        //     User::create($user);
+        // }
     }
 }

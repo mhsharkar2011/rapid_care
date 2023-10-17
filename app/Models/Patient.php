@@ -26,7 +26,7 @@ class Patient extends Authenticatable
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id','id');
     }
     
     public function doctors()
@@ -36,7 +36,7 @@ class Patient extends Authenticatable
 
     public function card()
     {
-        return $this->hasOne(Card::class,'created_by');
+        return $this->hasOne(Card::class,'created_by','user_id');
     }
 
     public function appointments()

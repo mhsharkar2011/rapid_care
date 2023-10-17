@@ -37,6 +37,7 @@ class CreateEmployeesTable extends Migration
             $table->string('zip',8)->nullable();
             $table->string('country')->default('Bangladesh')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
