@@ -28,7 +28,9 @@ td{
                         <select name="patient_id" class="form-select bg-light border-0" style="height: 55px;">
                             <option selected>Select Patient</option>
                             @foreach ($patients as $patient)
-                            <option value="{{ $patient->id}}">{{ $patient->name}}</option>
+                                @foreach ($patient->cards as $card )
+                                    <option value="{{ $patient->id}}">{{ $patient->name}}</option>
+                                @endforeach
                             @endforeach
                         </select>
                     </div>
@@ -53,3 +55,4 @@ td{
     </div>
     
 @endsection
+    

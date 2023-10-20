@@ -25,7 +25,12 @@ class Card extends Model
     ];
     public function appointments()
     {
-        return $this->hasMany(Appointment::class);
+        return $this->hasMany(Appointment::class,'card_id');
+    }
+
+    public function patient()
+    {
+        return $this->belongsTo(Patient::class,'user_id');
     }
 
 }

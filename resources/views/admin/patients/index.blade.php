@@ -46,9 +46,10 @@ th,td{
                 </thead>
                 <tbody>
                      @foreach ($patients as $patient)
+                     @foreach ($patient->cards as $card )
                     <tr>
                         <td class="text-center">{{ $patient->id }}</td>
-                        <td>{{ $patient->card->card_no }}</td>
+                        <td>{{ $card->card_no }}</td>
                         <td><x-patient-avatar :user="$patient->avatar" width="48px" heith="48px" class="rounded-circle"/></td>
                         <td>{{ $patient->name }}</td>
                         <td>{{ $patient->gender }}</td>
@@ -74,13 +75,14 @@ th,td{
                         <td><a href="{{ route('admin.patients.show', $patient->id) }}"> <i class="fas fa-eye text-info"></i></a></td>
                         <td><a href="{{ route('admin.patients.destroy', $patient->id) }}"><i class="fas fa-times-circle text-danger"></i></a></td>
                     </tr>
+                    @endforeach
                     @endforeach  
                 </tbody>
             </table>
             
             {{-- <x-pagination links="{{ $patients->links() }}" class="bg-blue-500 text-dark p-4" /> --}}
 
-                {{-- {{ $patients->links('components.pagination') }} --}}
+                {{ $patients->links('components.pagination') }}
 
         </div>
     </div>

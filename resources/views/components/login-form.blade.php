@@ -7,8 +7,8 @@
             @if (Route::is('admin*'))
             <form class="form-group" action="{{ route('admin.adminLogin') }}" method="POST">
               @csrf
-              <input type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
-              <input type="password" class="form-control my-3" name="password" placeholder="Password">
+              <input type="text" class="form-control" name="email" value="monir@gmail.com" placeholder="Email">
+              <input type="password" class="form-control my-3" name="password" value="123456" placeholder="Password">
               <br>
                 <div>
                     <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
@@ -24,8 +24,8 @@
             @else
             <form class="form-group" action="{{ route('frontEnd.storeLogin') }}" method="POST">
               @csrf
-              <input type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
-              <input type="password" class="form-control my-3" name="password" placeholder="Password">
+              <input type="text" class="form-control" name="email" value="monir@gmail.com" placeholder="Email">
+              <input type="password" class="form-control my-3" name="password" value="123456" placeholder="Password">
               <br>
                 <div>
                     <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>

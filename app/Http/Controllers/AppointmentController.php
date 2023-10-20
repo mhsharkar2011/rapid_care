@@ -33,8 +33,11 @@ class AppointmentController extends Controller
      */
     public function create(Doctor $doctor)
     {
-        $data['doctors'] = $doctor->select('id','name')->get();
-        $data['patient'] = auth()->user()->id;
+        $data['doctors'] = $doctor->select('id','name')->with('user')->whereHas('user',function($q) use($doctor){
+            $q->where('id',$doctor);
+        })->get();
+        $data['user'] = auth()->user()->id;
+
         return view('frontEnd.appointments.create',$data);
     }
     /**
@@ -46,7 +49,8 @@ class AppointmentController extends Controller
     public function store(Request $request)
     {
         $appoint = new Appointment();
-        $appoint->doctor_id = $request->input('doctor_id');
+        dd($appoint);
+        $appoint->user_id = $request->input('user_id');
         $appoint->patient_id = $request->user()->id;
         $appoint->date = $request->input('date');
         $appoint->time = $request->input('time');

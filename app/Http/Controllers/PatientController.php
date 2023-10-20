@@ -18,17 +18,12 @@ class PatientController extends Controller
      */
     public function index(Request $request)
     {
-        $pageLimit = $request->per_page ?? 4;
-        if($data['patients'] = Patient::with('user', 'card')->whereHas('user', function ($q) {
+        $pageLimit = $request->per_page ?? 15;
+        $data['patients'] = Patient::with('user', 'cards')->whereHas('user', function ($q) {
             $q->where('roles', 'Patient');
             $q->where('status', 'ACTIVE');
-        })->latest()->paginate($pageLimit) == NULL){
+        })->latest()->paginate($pageLimit);
             return view('admin.patients.index', $data);
-        }else{
-            $data['patients'] = User::all();
-            return view('admin.patients.index', $data);
-
-        }
     }
 
     /**

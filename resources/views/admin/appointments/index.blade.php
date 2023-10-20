@@ -1,5 +1,7 @@
 @extends('layouts.app')
-<x-slot name='title'>Appointments</x-slot>
+@section('title')
+    Appointment List
+@endsection
 
 @section('content')
 <style>
@@ -25,6 +27,7 @@ th,td{
                 <thead>
                     <tr>
                           <th>Serial No</th>
+                          <th>Card No</th>
                           <th>Photo</th>
                           <th>Patient Name </th>
                           <th>Date</th>
@@ -38,8 +41,11 @@ th,td{
                 </thead>
                 <tbody>
                      @foreach ($appointments as $appoint)
+                     
+                     
                     <tr>
                         <td class="text-center">{{ $appoint->id }}</td>
+                        <td class="text-center">{{ $appoint->card->card_no}}</td>
                         <td><x-patient-avatar :user="$appoint->patient->avatar" width="48px" heith="48px" class="rounded-circle"/></td>
                         <td class="text-center">{{ $appoint->patient->name}}</td>
                         <td class="text-center">{{ $appoint->date }}</td>

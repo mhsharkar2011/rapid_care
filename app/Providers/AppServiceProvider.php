@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Carbon\Laravel\ServiceProvider;
 use Illuminate\Pagination\Paginator;
-
+use Illuminate\Support\Arr;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,5 +26,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
+        
     }
 }

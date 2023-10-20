@@ -39,9 +39,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($users as $user)
+                    @foreach ($users as $user)    
                         <tr>
-                            <td>{{ ++$id }}</td>
+                            <td>{{ ++$i }}</td>
                             @if ($user->card)
                                 <td>{{ $user->card->card_no }}</td>
                             @else
@@ -103,7 +103,7 @@
             </table>
             <div>
                 <div class="pagination justify-content-center">
-                    {{-- {{ $users->links() }} --}}
+                    {{ $users->links() }}
                 </div>
             </div>
         </div>

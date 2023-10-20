@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
+use function App\helpers\paginateWithIndex;
+
 class UserController extends Controller
 {
     /**
@@ -24,13 +26,14 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $pageLimit = $request->per_page ?? 15;
+        $pageLimit = $request->per_page ?? 15;    
         $data = [];
-        $data['users'] = User::with('doctor','patient','employee','card')->latest()->paginate($pageLimit);
+        $data= User::with('doctor','patient','employee','card')->latest();
+        $result = paginateWithIndex($data, $pageLimit);
+        $data['users'] = $result['data'];
+        $data['slNo'] = $result['slNo'];
         $data['totalUsers'] = User::all()->count();
-        // $data['totalDoctors'] = Doctor::where('role_id','1')->count();
-
-        return view('admin.users.index', $data)->with('id',(request()->input('page', 1) - 1) * $pageLimit);
+        return view('admin.users.index', $data);
     }
 
     /**

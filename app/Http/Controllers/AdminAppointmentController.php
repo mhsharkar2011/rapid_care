@@ -21,8 +21,8 @@ class AdminAppointmentController extends Controller
         $pageLimit = $request->per_page ?? 10;
         $data['title'] = "Appointment Details";
         // $user_id = auth()->user()->id;
-        $data['appointments'] = Appointment::where('status','active')->with('employee','doctor','patient')->orderByRaw('id DESC')->paginate($pageLimit);
-        $data['appointmentsInActives'] = Appointment::where('status','INACTIVE')->with('employee','patient','doctor')->latest()->paginate($pageLimit);
+        $data['appointments'] = Appointment::where('status','active')->with('employee','doctor','patient','card')->orderByRaw('id DESC')->paginate($pageLimit);
+        $data['appointmentsInActives'] = Appointment::where('status','INACTIVE')->with('employee','patient','doctor','card')->latest()->paginate($pageLimit);
         return view('admin.appointments.index',$data);
     }
 
@@ -34,7 +34,7 @@ class AdminAppointmentController extends Controller
     public function create(Doctor $doctor,  Patient $patient)
     {
         $data['doctors'] = $doctor->select('id','name')->get();
-        $data['patients'] = $patient->select('id','name')->get();
+        $data['patients'] = $patient->with('cards')->get();
         return view('admin.appointments.create',$data);
     }
 
@@ -66,7 +66,7 @@ class AdminAppointmentController extends Controller
     {
         // $data['appoint'] =$appoint->with('patient','doctor')->get();
         // $data['appointments'] = $appoint->with('patient','doctor')->get();
-        $data['appointment'] = Appointment::with('patient','doctor')->find($id);
+        $data['appointment'] = Appointment::with('patient','doctor','card')->find($id);
         return view('admin.appointments.show',$data);
     }
 
