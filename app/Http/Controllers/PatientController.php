@@ -18,7 +18,7 @@ class PatientController extends Controller
      */
     public function index(Request $request)
     {
-        $pageLimit = $request->per_page ?? 15;
+        $pageLimit = $request->per_page ?? 5;
         $data['patients'] = Patient::with('user', 'cards')->whereHas('user', function ($q) {
             $q->where('roles', 'Patient');
             $q->where('status', 'ACTIVE');
@@ -56,9 +56,15 @@ class PatientController extends Controller
         return redirect()->route('admin.patients.index')->with('success', 'Patient Added Successfully');
     }
 
-    public function show(Patient $patient)
+    public function show(Request $request, Patient $patient)
     {
-        return view('admin.patients.show', compact('patient'));
+        $pageLimit = $request->per_page ?? 5;
+        $patients = Patient::with('user', 'cards')->whereHas('user', function ($q) {
+            $q->where('roles', 'Patient');
+            $q->where('status', 'ACTIVE');
+        })->latest()->paginate($pageLimit);
+
+        return view('admin.patients.show', compact('patient','patients'));
     }
 
     public function edit(Patient $patient)

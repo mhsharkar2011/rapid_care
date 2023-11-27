@@ -91,15 +91,17 @@
                                 </form>
                             </td>
                             <td>
-                                <a class="btn btn-info" href="{{ route('admin.users.show', $user->id) }}"> <i
-                                        class="far fa-eye"></i></a>
+                                <a class="btn btn-info" href="{{ route('admin.users.show', $user->id) }}"> 
+                                    <i class="far fa-eye"></i>
+                                </a>
                             </td>
                             <td>
                                 <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" value="" class="btn btn-danger"><i
-                                            class="far fa-trash-alt"></i></button>
+                                    <button type="submit" value="" class="btn btn-danger">
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
                                 </form>
                             </td>
                         </tr>

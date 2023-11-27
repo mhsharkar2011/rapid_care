@@ -19,8 +19,10 @@ td{
                     <div class="col-12 col-sm-6">
                         <select name="doctor_id" class="form-select bg-light border-0" style="height: 55px;">
                             <option selected>Select Doctor</option>
-                            @foreach ($doctors as $doctor)
+                            @foreach ($users as $doctor)
+                            @if ($doctor->roles == "Doctor")
                             <option value="{{ $doctor->id}}">{{ $doctor->name}}</option>
+                            @endif
                             @endforeach
                         </select>
                     </div>
@@ -28,7 +30,9 @@ td{
                         <select name="patient_id" class="form-select bg-light border-0" style="height: 55px;">
                             <option selected>Select Patient</option>
                             @foreach ($users as $patient)
+                            @if ($patient->roles == "Patient")
                                     <option value="{{ $patient->id}}">{{ $patient->name}}</option>
+                            @endif
                             @endforeach
                         </select>
                     </div>

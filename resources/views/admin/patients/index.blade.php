@@ -6,29 +6,11 @@
 @section('content')
 @php
 use Carbon\Carbon;
-@endphp
-<style>
-th,td{
-    text-align: center;
-}
-</style>
-    <div class="mt-5 text-center">
-        <p><button class="btn btn-primary mr-5" id="patientCalBtn">Patient Statistics</button>
-        </p>
-        
-    </div>
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-            <div id="result">
-                
-            </div>
-        </div>
-    </div>
-    
+@endphp 
     <h3 class="text text-primary text-center my-5">All Patients</h3>
     <div class="row">
         <div class="col-12">
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped table-sm table-hover">
                 <thead>
                     <tr>
                           <th>Patient Id </th>
@@ -72,18 +54,14 @@ th,td{
                         @else
                         <td>{{ $patient->user->status }}</td>   
                         @endif
-                        <td><a href="{{ route('admin.patients.show', $patient->id) }}"> <i class="fas fa-eye text-info"></i></a></td>
-                        <td><a href="{{ route('admin.patients.destroy', $patient->id) }}"><i class="fas fa-times-circle text-danger"></i></a></td>
+                        <td><a class="btn btn-info" href="{{ route('admin.patients.show', $patient->id) }}"> <i class="far fa-eye"></i></a></td>
+                        <td><a class="btn btn-danger" href="{{ route('admin.patients.destroy', $patient->id) }}"><i class="far fa-trash-alt"></i></a></td>
                     </tr>
                     @endforeach
                     @endforeach  
                 </tbody>
             </table>
-            
-            {{-- <x-pagination links="{{ $patients->links() }}" class="bg-blue-500 text-dark p-4" /> --}}
-
                 {{ $patients->links('components.pagination') }}
-
         </div>
     </div>
 @endsection

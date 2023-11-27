@@ -24,12 +24,12 @@
     <h3 class="text text-primary text-center mt-5">List of Appointments</h3>
     <div class="row">
         <div class="table-responsive md-5">
-            <table class="table table-striped table-dark table-sm align-middle text-white datatable">
-                <thead class="text-wrap align-middle text-center font-bold">
+            <table class="table table-striped table-bordered table-dark table-sm text-white datatable"  >
+                <thead class="text-wrap align-middle  font-bold">
                     <tr>
                         <th>ID</th>
                         <th>Card No</th>
-                        {{-- <th>Photo</th> --}}
+                        <th>Photo</th>
                         <th>Name </th>
                         <th>Phone </th>
                         <th>Email</th>
@@ -45,14 +45,15 @@
                     <tr>
                         <td>{{ ++$i }}</td>
                         <td>{{ $appoint->card->card_no ?? '' }}</td>
-                        <td><x-patient-avatar :user="$appoint->patient->avatar ?? ''" width="48px" heith="48px" class="rounded-circle" /></td>
-                        <td>{{ $appoint->user->name ?? '' }}</td>
-                        <td>{{ $appoint->patient->phone ?? '' }}</td>
-                        <td>{{ $appoint->patient->user->email ?? '' }}</td>
+                        <td><x-patient-avatar :user="$appoint->pUser->patient->avatar ?? ''" width="48px" heith="48px" class="rounded-circle" /></td>
+                        <td>{{ $appoint->pUser->patient->name ?? '' }}</td>
+                        <td>{{ $appoint->pUser->patient->phone ?? '' }}</td>
+                        <td>{{ $appoint->pUser->email ?? '' }}</td>
                         <td>{{ $appoint->date }}</td>
                         <td>{{ Carbon\Carbon::parse($appoint->time)->format('h:i A') }}</td>
-                        <td>{{ $appoint->patient->phone ?? '' }}</td>
-                        <td>{{ $appoint->doctor->name ?? '' }}</td>
+                       
+                        <td>{{ $appoint->dUser->doctor->name ?? ''  }}</td>
+                       
                         <td>
                             <form action="{{ route('frontEnd.appointments.update-status', $appoint->id) }}"
                                 method="POST">
@@ -61,24 +62,24 @@
                                 <div>
                                     <select style="display:none" name="status" id="status"
                                         class="badge bg-inverse-primary ml-2">
-                                        @if ($appoint->status == 'ACTIVE')
+                                        @if ($appoint->status == 'Active')
                                             <div class=" badge bg-inverse-success ml-2">
                                                 <option value="INACTIVE"
-                                                    {{ $appoint->status == 'INACTIVE' ? 'selected' : '' }}>
+                                                    {{ $appoint->status == 'Inactive' ? 'selected' : '' }}>
                                                 </option>
                                             </div>
                                         @else
                                             <option value="ACTIVE"
-                                                {{ $appoint->status == 'ACTIVE' ? 'selected' : '' }}></option>
+                                                {{ $appoint->status == 'Active' ? 'selected' : '' }}></option>
                                         @endif
                                     </select>
                                 </div>
 
                                 <button type="submit" class="btn">
-                                    @if ($appoint->status != 'ACTIVE')
-                                        <span class="text-warning">INACTIVE</span>
+                                    @if ($appoint->status == 'Active')
+                                        <span class="text-success">ACTIVE</span>
                                     @else
-                                        <span class="bg-inverse-dark text-success">ACTIVE</span>
+                                        <span class="bg-inverse-dark text-warning">INACTIVE</span>
                                     @endif
                                 </button>
                             </form>

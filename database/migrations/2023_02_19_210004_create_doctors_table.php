@@ -18,7 +18,7 @@ class CreateDoctorsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('name');
-            $table->string('specialization')->nullable();
+            $table->string('specialist')->nullable();
             $table->string('designation')->nullable();
             $table->string('gender')->nullable();
             $table->string('avatar')->nullable();

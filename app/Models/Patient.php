@@ -38,6 +38,10 @@ class Patient extends Authenticatable
     {
         return $this->hasMany(Card::class,'created_by','user_id');
     }
+    public function card()
+    {
+        return $this->hasOne(Card::class,'created_by','user_id');
+    }
 
     public function appointments()
     {
