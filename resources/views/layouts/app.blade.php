@@ -25,6 +25,12 @@
     <link href="{{ asset('customAdmin/css/sb-admin.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('customAdmin/css/custom.css') }}">
 
+    <!-- Toastr -->
+    	{{-- message toastr --}}
+	<link rel="stylesheet" href="{{ URL::to('css/toastr.min.css') }}">
+	<script src="{{ URL::to('js/toastr_jquery.min.js') }}"></script>
+	<script src="{{ URL::to('js/toastr.min.js') }}"></script>
+
     @yield('singlePageStyle')
 
 </head>
@@ -57,6 +63,7 @@
         @include('layouts.backend.logout-model')
     @endif
 
+    {!! Toastr::message() !!}
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('customAdmin/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('customAdmin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

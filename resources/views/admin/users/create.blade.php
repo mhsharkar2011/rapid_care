@@ -9,7 +9,7 @@
     <div class="row">
       <div class="col-md-9 col-md-6 col-lg-9 mx-auto">
         <div class="card card-signin">
-            <div class="card-header text-center text-uppercase text-primary">{{ __('Register') }}</div>
+            <div class="card-header text-center text-uppercase text-primary">{{ __('User Form') }}</div>
             <div class="card-body">
                 <form class="form-group" method="POST" action="{{ route('admin.users.store') }}">
                     @csrf
@@ -83,8 +83,8 @@
                     </div>
                     <div class="form-group row mb-0">
                         <div class="col-md-12 mt-5 text-center">
-                        <x-button type="submit">Register</x-button>
-                        <a href="{{ route('frontEnd.login') }}"><x-button type="button">Login</x-button></a>
+                        <x-button type="submit">Save</x-button>
+                        <a href="{{ route('admin.dashboard') }}"><x-button type="button">Go Back</x-button></a>
                         </div>
                     </div>
                 </div>

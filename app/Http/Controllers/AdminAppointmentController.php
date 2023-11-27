@@ -21,9 +21,9 @@ class AdminAppointmentController extends Controller
         $pageLimit = $request->per_page ?? 10;
         $data['title'] = "Appointment Details";
         // $user_id = auth()->user()->id;
-        $data['appointments'] = Appointment::where('status','active')->with('employee','doctor','patient','card')->orderByRaw('id DESC')->paginate($pageLimit);
+        $data['appointments'] = Appointment::where('status','active')->with('employee','doctor','user','card')->orderByRaw('id DESC')->paginate($pageLimit);
         $data['appointmentsInActives'] = Appointment::where('status','INACTIVE')->with('employee','patient','doctor','card')->latest()->paginate($pageLimit);
-        return view('admin.appointments.index',$data);
+        return view('admin.appointments.index',$data)->with('i',(request()->input('page',1)-1) * $pageLimit);
     }
 
     /**
@@ -31,10 +31,11 @@ class AdminAppointmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Doctor $doctor,  Patient $patient)
+    public function create(Doctor $doctor,  User $user)
     {
+        
         $data['doctors'] = $doctor->select('id','name')->get();
-        $data['patients'] = $patient->with('cards')->get();
+        $data['users'] = $user->select('id','name')->get();
         return view('admin.appointments.create',$data);
     }
 

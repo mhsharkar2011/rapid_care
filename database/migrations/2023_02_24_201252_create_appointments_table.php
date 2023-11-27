@@ -16,8 +16,8 @@ class CreateAppointmentsTable extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('doctor_id')->nullable()->constrained('doctors');
-            $table->foreignId('patient_id')->nullable()->constrained('patients');
+            $table->unsignedBigInteger('doctor_id');
+            $table->unsignedBigInteger('patient_id');
             $table->date('date');
             $table->time('time');
             $table->enum('status',[Status::ACTIVE, Status::INACTIVE])->default(Status::ACTIVE);

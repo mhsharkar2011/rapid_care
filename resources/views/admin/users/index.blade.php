@@ -1,8 +1,7 @@
 @extends('layouts.app')
 @section('title')
-    user List
+    User List
 @endsection
-
 @section('content')
     <style>
         th,
@@ -10,11 +9,17 @@
             text-align: center;
         }
     </style>
-    <div class="mt-5 text-center">
-        <p><button class="btn btn-primary mr-5" id="userCalBtn">User Statistics</button>
-            <a href="{{ route('admin.users.create') }}" class="btn btn-primary ml-5">Add New User</a>
-        </p>
-
+    <div class="row">
+        <div class="col-md-3">
+            <p>
+                <a href="{{ route('admin.users.create') }}" class="btn btn-primary ml-5">{!! Helper::uppercase('Add New User') !!}</a>
+            </p>
+        </div>
+        <div class="col-md-9" style="text-align: right !impotant">
+            <form method="GET" action="{{ route('admin.users.index') }}" class="gy-1 gx-1">
+                <x-search /> 
+            </form>
+        </div>
     </div>
     <div class="row">
         <div class="col-md-6 offset-md-3">

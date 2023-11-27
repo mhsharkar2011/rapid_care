@@ -89,7 +89,7 @@ class PatientController extends Controller
     public function destroy(Patient $patient)
     {
         $patient->delete();
-        return view('admin.patient.index');
+        return redirect()->route('admin.patients.index');
     }
 
     public function calPatient()

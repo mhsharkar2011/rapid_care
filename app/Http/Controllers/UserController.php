@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
+use App\Helpers\SlNo;
 use App\Models\Card;
 use App\Models\Doctor;
 use App\Models\Patient;
 use App\Models\User;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -15,7 +18,7 @@ use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-use function App\helpers\paginateWithIndex;
+use function App\Helpers\PageLimit;
 
 class UserController extends Controller
 {
@@ -26,14 +29,20 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $pageLimit = $request->per_page ?? 15;    
+        $pages = PageLimit(5);
         $data = [];
-        $data= User::with('doctor','patient','employee','card')->latest();
-        $result = paginateWithIndex($data, $pageLimit);
-        $data['users'] = $result['data'];
-        $data['slNo'] = $result['slNo'];
+        $users = User::with('doctor', 'patient', 'employee', 'card')->latest();
+        $search = $request->input('search');
+        if ($search) {
+            $users->where('name', 'Like', "%{$search}%")
+                ->orWhere('roles', 'LIKE', "%{$search}%")
+                ->orWhereHas('card', function ($q) use ($search) {
+                    $q->where('card_no', 'LIKE', "%{$search}%");
+                });
+        }
+        $data['users'] = $users->paginate($pages);
         $data['totalUsers'] = User::all()->count();
-        return view('admin.users.index', $data);
+        return view('admin.users.index', $data)->with('i', ($request->input('page', 1) - 1) * $pages);
     }
 
     /**
@@ -45,7 +54,7 @@ class UserController extends Controller
     {
         $data['title'] = "Register Page";
         $data['roles'] = User::all();
-        return view('admin.users.create',$data);
+        return view('admin.users.create', $data);
     }
 
     /**
@@ -56,31 +65,35 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $validator =  Validator::make($request->all(),[
+        $validator =  Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|unique:users',
-            'password' =>'required|confirmed'
+            'password' => 'required|confirmed'
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-        $patient = User::create([
+        $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'roles' => $request->input('roles'),
             'status' => $request->input('status'),
             'password' => Hash::make($request->input('password')),
         ]);
-        Auth::login($patient);
+        Auth::login($user);
         $credentails = $request->only('email', 'password');
 
-        if(Auth::attempt($credentails)){
-            return redirect()->route('admin.users.index')->with('success', 'User Added Successfully');
-        }else{
+        if ($user->wasRecentlyCreated) {
+            Toastr::success('User created successfully', 'Success');
+        } else {
+            Toastr::warning('User already exists', 'Warning');
+        }
+        if (Auth::attempt($credentails)) {
+            return redirect()->route('admin.users.index');
+        } else {
             return redirect()->route('login');
         }
-        
     }
 
     /**
@@ -91,7 +104,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('admin.users.show',compact('user'));
+        return view('admin.users.show', compact('user'));
     }
 
     /**
@@ -102,10 +115,10 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $cardNo = Card::select('card_no')->where('created_by',$user->id)->first();
-        if($cardNo){
-            return view('admin.users.edit',compact('user','cardNo'));
-        }else{
+        $cardNo = Card::select('card_no')->where('created_by', $user->id)->first();
+        if ($cardNo) {
+            return view('admin.users.edit', compact('user', 'cardNo'));
+        } else {
             echo "<h1>No Card No Found</h1>";
         }
     }
@@ -134,9 +147,8 @@ class UserController extends Controller
             $user->save();
         }
         $user->update($input);
-        
-        return redirect()->route('admin.users.index')->with('success', 'User Updated Successfully');
 
+        return redirect()->route('admin.users.index')->with('success', 'User Updated Successfully');
     }
 
     /**
@@ -148,27 +160,28 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('admin.users.index')->with('success', 'User Deleted Successfully');
+        Toastr::error('success', 'User Deleted Successfully');
+        return redirect()->route('admin.users.index');
     }
 
     public function updateStatus(Request $request, User $user)
     {
-            $status = $request->status;
-            if($status == 'Active' || $status == 'Inactive'){
+        $status = $request->status;
+        if ($status == 'Active' || $status == 'Inactive') {
             $user->status = $status;
             $user->save();
-                return redirect()->back()->with('status', 'Status has been updated.');
-            }else{
-                return redirect()->back('error','Invalid Status');
+            return redirect()->back()->with('status', 'Status has been updated.');
+        } else {
+            return redirect()->back('error', 'Invalid Status');
         }
     }
 
     public function userAccess(Request $request)
     {
         $pageLimit = $request->per_page ?? 15;
-        $roles = Role::orderBy('id','DESC')->paginate($pageLimit);
-        $permissions = Permission::orderBy('id','DESC')->paginate($pageLimit);
-        return view('auth.user-access',compact('roles','permissions'))
+        $roles = Role::orderBy('id', 'DESC')->paginate($pageLimit);
+        $permissions = Permission::orderBy('id', 'DESC')->paginate($pageLimit);
+        return view('auth.user-access', compact('roles', 'permissions'))
             ->with('i', ($request->input('page', 1) - 1) * $pageLimit);
     }
 }

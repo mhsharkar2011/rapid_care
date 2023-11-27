@@ -27,10 +27,8 @@ td{
                     <div class="col-12 col-sm-6">
                         <select name="patient_id" class="form-select bg-light border-0" style="height: 55px;">
                             <option selected>Select Patient</option>
-                            @foreach ($patients as $patient)
-                                @foreach ($patient->cards as $card )
+                            @foreach ($users as $patient)
                                     <option value="{{ $patient->id}}">{{ $patient->name}}</option>
-                                @endforeach
                             @endforeach
                         </select>
                     </div>
