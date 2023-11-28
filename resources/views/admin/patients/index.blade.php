@@ -22,7 +22,7 @@ use Carbon\Carbon;
                           <th>Age</th>
                           <th>Phone</th>
                           <th>Email</th>
-                          <th>Status</th>
+                          <th>Card Type</th>
                           <th colspan="2">Action</th>
                     </tr>
                 </thead>
@@ -30,7 +30,7 @@ use Carbon\Carbon;
                      @foreach ($patients as $patient)
                      @foreach ($patient->cards as $card )
                     <tr>
-                        <td class="text-center">{{ $patient->id }}</td>
+                        <td class="text-center">{{ ++$i }}</td>
                         <td>{{ $card->card_no }}</td>
                         <td><x-patient-avatar :user="$patient->avatar" width="48px" heith="48px" class="rounded-circle"/></td>
                         <td>{{ $patient->name }}</td>
@@ -44,18 +44,11 @@ use Carbon\Carbon;
                            {{ $age }}
                         </td>
                         <td>{{ $patient->phone }}</td>
-                        @if ($patient->email != Null)
-                           <td> No Email Found</td>
-                        @else
-                        <td>{{ $patient->user->email }}</td>   
-                        @endif
-                        @if ($patient->status != Null)
-                            <td>No Data Found</td>
-                        @else
-                        <td>{{ $patient->user->status }}</td>   
-                        @endif
+                        <td>{{ $card->category }}</td>   
                         <td><a class="btn btn-info" href="{{ route('admin.patients.show', $patient->id) }}"> <i class="far fa-eye"></i></a></td>
-                        <td><a class="btn btn-danger" href="{{ route('admin.patients.destroy', $patient->id) }}"><i class="far fa-trash-alt"></i></a></td>
+                        <td>
+                            
+                        </td>
                     </tr>
                     @endforeach
                     @endforeach  

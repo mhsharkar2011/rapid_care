@@ -2,6 +2,11 @@
 @section('title')
     Patient Details
 @endsection
+@once
+@push('css')
+    <link href="{{ asset('css/dataTables.bootstrap5.min.css') }}" />
+@endpush
+@endOnce
 @section('content')
     <div class="container">
         <div class="row">
@@ -64,12 +69,12 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header text-dark ">
-                        <h3 class="text text-primary text-center">Prescription</h3>
+                        <h3 class="text text-primary text-center">All Appointments</h3>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12">
-                                <table class="table table-bordered table-striped table-sm table-hover">
+                                <table class="table table-striped table-dark table-sm align-middle text-white datatable">
                                     <thead>
                                         <tr>
                                             <th>Patient Id </th>
@@ -86,48 +91,163 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($patients as $patient)
-                                            @foreach ($patient->cards as $card)
-                                                <tr>
-                                                    <td class="text-center">{{ $patient->id }}</td>
-                                                    <td>{{ $card->card_no }}</td>
-                                                    <td><x-patient-avatar :user="$patient->avatar" width="48px" heith="48px"
-                                                            class="rounded-circle" /></td>
-                                                    <td>{{ $patient->name }}</td>
-                                                    <td>{{ $patient->gender }}</td>
-                                                    <td>{{ $patient->dob }}</td>
-                                                    <td>
-                                                        @php
-                                                            $dob = Carbon::parse($patient->dob);
-                                                            $age = $dob->diffInYears(Carbon::now());
-                                                        @endphp
-                                                        {{ $age }}
-                                                    </td>
-                                                    <td>{{ $patient->phone }}</td>
-                                                    @if ($patient->email != null)
-                                                        <td> No Email Found</td>
-                                                    @else
-                                                        <td>{{ $patient->user->email }}</td>
-                                                    @endif
-                                                    @if ($patient->status != null)
-                                                        <td>No Data Found</td>
-                                                    @else
-                                                        <td>{{ $patient->user->status }}</td>
-                                                    @endif
-                                                    <td><a class="btn btn-info"
-                                                            href="{{ route('admin.patients.show', $patient->id) }}"> <i
-                                                                class="far fa-eye"></i></a></td>
-                                                    <td><a class="btn btn-danger"
-                                                            href="{{ route('admin.patients.destroy', $patient->id) }}"><i
-                                                                class="far fa-trash-alt"></i></a></td>
-                                                </tr>
-                                            @endforeach
-                                        @endforeach
+                                       <tr>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                       </tr>
+                                       <tr>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                       </tr>
+                                       <tr>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                       </tr>
+                                       <tr>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                       </tr>
+                                       <tr>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                       </tr>
+                                       <tr>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                       </tr>
+                                       <tr>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                       </tr>
+                                       <tr>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                       </tr>
+                                       <tr>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                       </tr>
+                                       <tr>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                       </tr>
+                                       <tr>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                        <td>H1</td>
+                                       </tr>
+                                       
                                     </tbody>
                                 </table>
-                            </div>
-                            <div class="col-12">
-                                {{ $patients->links('components.pagination') }}
                             </div>
                         </div>
                     </div>

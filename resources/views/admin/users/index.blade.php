@@ -3,12 +3,6 @@
     User List
 @endsection
 @section('content')
-    <style>
-        th,
-        td {
-            text-align: center;
-        }
-    </style>
     <div class="row">
         <div class="col-md-3">
             <p>

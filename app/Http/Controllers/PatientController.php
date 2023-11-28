@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appointment;
 use App\Models\Card;
 use App\Models\Patient;
 use App\Models\User;
@@ -23,7 +24,8 @@ class PatientController extends Controller
             $q->where('roles', 'Patient');
             $q->where('status', 'ACTIVE');
         })->latest()->paginate($pageLimit);
-            return view('admin.patients.index', $data);
+        $data['patientAppoint'] = Appointment::where('status','approved')->with('patient','doctor','card')->latest()->paginate($pageLimit);
+            return view('admin.patients.index', $data)->with('i', ($request->input('page', 1) - 1) * $pageLimit);
     }
 
     /**

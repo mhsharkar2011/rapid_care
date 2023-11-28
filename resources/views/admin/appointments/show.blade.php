@@ -47,7 +47,18 @@
                                                 <x-doctor-avatar :user="$appointment->dUser->doctor->avatar" width="80px" heith="80px"></x-doctor-avatar>
                                             </div>
                                         </div>
+                                        
                                 </div>
+                            </div>
+                            <div class="col-6">
+                                <td><a class="btn btn-info" href="#">Approved</a></td>
+                            </div>
+                            <div class="col-lg-6">
+                                <form action="{{ route('admin.appointments.destroy', $appointment->pUser->patient->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
                             </div>
                         </div>
                     </div>

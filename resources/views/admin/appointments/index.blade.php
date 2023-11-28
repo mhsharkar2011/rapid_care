@@ -2,14 +2,7 @@
 @section('title')
     Appointment List
 @endsection
-
 @section('content')
-    <style>
-        th,
-        td {
-            text-align: center;
-        }
-    </style>
     <div class="mt-5 text-center">
         <a href="{{ route('admin.appointments.create') }}" class="btn btn-primary ml-5">Add New Appointment</a>
     </div>
@@ -24,7 +17,8 @@
     <h3 class="text text-primary text-center mt-5">List of Appointments</h3>
     <div class="row">
         <div class="table-responsive md-5">
-            <table class="table table-striped table-bordered table-dark table-sm text-white datatable"  >
+            <table id="dataTable" class="table table-striped table-dark table-sm align-middle text-white"
+                style="width: 100%">
                 <thead class="text-wrap align-middle  font-bold">
                     <tr>
                         <th>ID</th>
@@ -37,13 +31,13 @@
                         <th>Time</th>
                         <th>Doctor </th>
                         <th>Status</th>
-                        <th colspan="2">Action</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
-                
-                    @forelse ($appointments as $appoint )
+
+                @forelse ($appointments as $key=>$appoint)
                     <tr>
-                        <td>{{ ++$i }}</td>
+                        <td>{{ ++$key }}</td>
                         <td>{{ $appoint->card->card_no ?? '' }}</td>
                         <td><x-patient-avatar :user="$appoint->pUser->patient->avatar ?? ''" width="48px" heith="48px" class="rounded-circle" /></td>
                         <td>{{ $appoint->pUser->patient->name ?? '' }}</td>
@@ -51,12 +45,11 @@
                         <td>{{ $appoint->pUser->email ?? '' }}</td>
                         <td>{{ $appoint->date }}</td>
                         <td>{{ Carbon\Carbon::parse($appoint->time)->format('h:i A') }}</td>
-                       
-                        <td>{{ $appoint->dUser->doctor->name ?? ''  }}</td>
-                       
+
+                        <td>{{ $appoint->dUser->doctor->name ?? '' }}</td>
+
                         <td>
-                            <form action="{{ route('frontEnd.appointments.update-status', $appoint->id) }}"
-                                method="POST">
+                            <form action="{{ route('frontEnd.appointments.update-status', $appoint->id) }}" method="POST">
                                 @csrf
                                 @method('PUT')
                                 <div>
@@ -69,39 +62,37 @@
                                                 </option>
                                             </div>
                                         @else
-                                            <option value="ACTIVE"
-                                                {{ $appoint->status == 'Active' ? 'selected' : '' }}></option>
+                                            <option value="ACTIVE" {{ $appoint->status == 'Active' ? 'selected' : '' }}>
+                                            </option>
                                         @endif
                                     </select>
                                 </div>
 
                                 <button type="submit" class="btn">
                                     @if ($appoint->status == 'Active')
-                                        <span class="text-success">ACTIVE</span>
+                                        <span class="text-success">Pending</span>
                                     @else
-                                        <span class="bg-inverse-dark text-warning">INACTIVE</span>
+                                        <span class="bg-inverse-dark text-warning">Approved</span>
                                     @endif
                                 </button>
                             </form>
                         </td>
                         <td>
-                            <a href="{{ route('admin.appointments.show', $appoint->id) }}"
-                                class="btn btn-success"><i class="far fa-eye"></i></a>
+                            <a class="btn btn-info" href="{{ route('admin.appointments.show', $appoint->id) }}"><i
+                                    class="fa-regular fa-address-card"></i></a>
                         </td>
-                        <td>
-                            <form action="{{ route('admin.appointments.destroy', $appoint->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <input type="submit" value="Delete" class="btn btn-danger btn-block">
-                            </form>
-                        </td>
-                        @empty
+                    @empty
                         <h1>No Records Found</h1>
                     </tr>
-                    @endforelse
-               
+                @endforelse
+
             </table>
             {{ $appointments->links('components.pagination') }}
         </div>
     </div>
 @endsection
+@once
+@push('scripts')
+    
+@endpush
+@endonce
