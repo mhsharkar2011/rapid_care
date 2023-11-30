@@ -44,19 +44,18 @@ class PatientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $patient = new Patient();
-        $patient->name = $request->input('name');
-        $patient->gender = $request->input('gender');
-        $patient->dob = $request->input('dob');
-        $patient->address = $request->input('address');
-        $patient->user_id = auth()->user()->id;
-        $patient->card_id = auth()->user()->id;
-        $patient->save();
+    // public function store(Request $request)
+    // {
+    //     $patient = new Patient();
+    //     $patient->name = $request->input('name');
+    //     $patient->gender = $request->input('gender');
+    //     $patient->dob = $request->input('dob');
+    //     $patient->address = $request->input('address');
+    //     $patient->user_id = auth()->user()->id;
+    //     $patient->save();
 
-        return redirect()->route('admin.patients.index')->with('success', 'Patient Added Successfully');
-    }
+    //     return redirect()->route('admin.patients.index')->with('success', 'Patient Added Successfully');
+    // }
 
     public function show(Request $request, Patient $patient)
     {
@@ -96,8 +95,12 @@ class PatientController extends Controller
 
     public function destroy(Patient $patient)
     {
+        $avatarPath = 'public/patients/avatars/'.$patient->avatar;
+        if (Storage::exists($avatarPath)) {
+            Storage::delete($avatarPath); // Use Storage::delete for better file management
+        }
         $patient->delete();
-        return redirect()->route('admin.patients.index');
+        return redirect()->route('admin.patients.index')->with('success','Patient Deleted Successfully');
     }
 
     public function calPatient()

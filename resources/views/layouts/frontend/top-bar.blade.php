@@ -20,7 +20,7 @@
                @endif --}}
                @if (Route::is('frontEnd.appointments.show'))
                     <div class="me-3 pe-3 border-end py-2">
-                        <p class="m-0"><i class="fa-solid fa-id-card"></i> Card No.{{ $appointments->patient->card->card_no }}</p>
+                        <p class="m-0"><i class="fa-solid fa-id-card"></i> Card No.{{ $appointment->user->card->card_no }}</p>
                     </div>
                @endif
                

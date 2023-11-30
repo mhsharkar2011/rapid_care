@@ -22,7 +22,7 @@
               </div>
             </form>
             @else
-            <form class="form-group" action="{{ route('frontEnd.storeLogin') }}" method="POST">
+            <form class="form-group" action="{{ route('frontEnd.frontEndLogin') }}" method="POST">
               @csrf
               <input type="text" class="form-control" name="email" value="monir@gmail.com" placeholder="Email">
               <input type="password" class="form-control my-3" name="password" value="123456" placeholder="Password">

@@ -9,7 +9,7 @@
     <div class="row">
       <div class="col-md-9 col-md-6 col-lg-9 mx-auto">
         <div class="card card-signin">
-            <div class="card-header text-center text-uppercase text-primary">{{ __('User Form') }}</div>
+            <div class="card-header text-center text-uppercase text-primary">{{ __('Create new User') }}</div>
             <div class="card-body">
                 <form class="form-group" method="POST" action="{{ route('admin.users.store') }}">
                     @csrf
@@ -25,13 +25,24 @@
                             @enderror
                         </div>
                     </div>
-
+                    <div class=" row">
+                        <label for="phone" class="col-md-3 col-form-label text-md-right">{{ __('Phone') }}</label>
+                        <div class="col-md-6">
+                            <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" autofocus>
+                            @error('phone')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class=" row ">
+                        <label for="email" class="col-md-3 col-form-label text-md-right m-0 p-0">{{ __('Or') }}</label>
+                    </div>
                     <div class="form-group row ">
                         <label for="email" class="col-md-3 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
                         <div class="col-md-6">
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Enter a vali  ">
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -82,7 +93,7 @@
                         </div>
                     </div>
                     <div class="form-group row mb-0">
-                        <div class="col-md-12 mt-5 text-center">
+                        <div class="col-md-12 text-center">
                         <x-button type="submit">Save</x-button>
                         <a href="{{ route('admin.dashboard') }}"><x-button type="button">Go Back</x-button></a>
                         </div>

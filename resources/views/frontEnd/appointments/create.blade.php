@@ -37,9 +37,7 @@
                                     <select name="doctor_id" class="form-select bg-light border-0" style="height: 55px;">
                                         <option selected>Select Doctor</option>
                                         @foreach ($doctors as $doctor)
-                                        @if ($doctor->id == auth()->user()->id)
                                         <option value="{{ $doctor->id}}">{{ $doctor->name}}</option>
-                                        @endif
                                         @endforeach
                                     </select>
                                 </div>

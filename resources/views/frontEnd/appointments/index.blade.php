@@ -1,72 +1,67 @@
-@extends('layouts.frontend-user')
+@extends('layouts.master')
 @section('title')
     Appointment List
 @endsection
-
 @section('content')
-  
-<div class="row gx-0">
-    <h3 class="text text-primary text-center mt-5">{{ auth()->user()->name }} Status</h3>
-    <div class="d-flex justify-content-center">
-    <div class="table-responsive">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                              <th>Serial No</th>
-                              {{-- <th>Card No</th> --}}
-                              <th>Date</th>
-                              <th>Time</th>
-                              {{-- <th>Email</th> --}}
-                              <th>Doctor Name </th>
-                              <th>Prescription No.</th>
-                              <th>Status</th>
-                              <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                         @foreach ($appointments as $appoint)
-                        <tr>
-                            <td class="text-center">{{ $appoint->id }}</td>
-                            {{-- <td class="text-center">{{ $appoint->patient->card->card_no}}</td> --}}
-                            <td class="text-center">{{ $appoint->date}}</td>
-                            <td class="text-center">{{ Carbon\Carbon::parse($appoint->time)->format('h:i A')}}</td>
-                            {{-- <td>{{ $appoint->patient->user->email }}</td> --}}
-                            <td class="text-center">{{ $appoint->doctor->name ?? ''}}</td>
-                            <td>{{ $appoint->doctor->phone }}</td>
-                            <td>
-                                <form action="{{ route('frontEnd.appointments.update-status', $appoint->id) }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
+<h3 class="text text-primary text-center mt-5"> {{ auth()->user()->name }} Appointments Status</h3>
+<div class="row justify-content-center">
+        <div class=" card col-lg-9">
+            <div class="card-body">
+        <div class="table-responsive">
+            <table id="dataTable" class="table table-dark  table-hover table-sm align-middle" style="width: 100%">
+                <thead class="text-wrap bg-dark text-center  ">
+                            <tr>
+                                  <th>Serial No</th>
+                                  <th>Date</th>
+                                  <th>Time</th>
+                                  <th>Doctor Name </th>
+                                  <th>Status</th>
+                                  <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                             @foreach ($appointments as $appoint)
+                            <tr>
+                                <td class="text-center">{{ ++$id }}</td>
+                                <td class="text-center">{{ $appoint->date}}</td>
+                                <td class="text-center">{{ Carbon\Carbon::parse($appoint->time)->format('h:i A')}}</td>
+                                <td class="text-center">{{ $appoint->dUser->name ?? ''}}</td>
+                                <td>
+                                    <form action="{{ route('frontEnd.appointments.update-status', $appoint->id) }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
                                         <div>
-                                            <select style="display:none" name="status" id="status" class="badge bg-inverse-primary ml-2">
-                                                @if ($appoint->status == 'ACTIVE')
-                                                <div class=" badge bg-inverse-success ml-2">
-                                                <option value="INACTIVE" {{ $appoint->status == 'INACTIVE' ? 'selected' : '' }}></option>
-                                                </div>
+                                            <select style="display:none" name="status" id="status"
+                                                class="badge bg-inverse-primary ml-2">
+                                                @if ($appoint->status == 'Active')
+                                                    <div class=" badge bg-inverse-success ml-2">
+                                                        <option value="INACTIVE" {{ $appoint->status == 'Inactive' ? 'selected' : '' }} ></option>
+                                                    </div>
                                                 @else
-                                                <option value="ACTIVE" {{ $appoint->status == 'ACTIVE' ? 'selected' : '' }}></option>
+                                                    <option value="ACTIVE" {{ $appoint->status == 'Active' ? 'selected' : '' }}></option>
                                                 @endif
                                             </select>
                                         </div>
-                            
-                                    <button type="submit" class="btn">
-                                        @if ($appoint->status != 'ACTIVE')
-                                        <span class="text-warning">INACTIVE</span>
-                                        @else
-                                        <span class="bg-inverse-dark text-success">ACTIVE</span>
-                                        @endif
-                                    </button>
-                                </form>
-                            </td>
-                            <td class="text-center">
-                                <a href="{{ route('frontEnd.appointments.show', $appoint->id) }}"><i class="far fa-eye"></i></a>
-                            </td>
-                   
-                        </tr>
-                        @endforeach  
-                    </tbody>
-                </table>
-                    {{ $appointments->links('components.pagination') }}
+                                        <button type="submit" class="btn">
+                                            @if ($appoint->status == 'Active')
+                                                <span class="text-success">Pending</span>
+                                            @else
+                                                <span class="bg-inverse-dark text-warning">Approved</span>
+                                            @endif
+                                        </button>
+                                    </form>
+                                </td>
+                                <td class="text-center">
+                                    <a href="{{ route('frontEnd.appointments.show', $appoint->id) }}"><i class="far fa-eye"></i></a>
+                                </td>
+                       
+                            </tr>
+                            @endforeach  
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
+            </div>
+    </div>
+</div>
 @endsection

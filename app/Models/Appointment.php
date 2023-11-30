@@ -14,6 +14,11 @@ class Appointment extends Model
         'id'
     ];
 
+    public function card()
+    {
+        return $this->belongsTo(Card::class,'patient_id');
+    }
+
     public function pUser()
     {
         return $this->belongsTo(User::class,'patient_id','id');
@@ -23,23 +28,22 @@ class Appointment extends Model
     {
         return $this->belongsTo(User::class,'doctor_id','id');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class,'patient_id','id');
+    }
     public function patient()
     {
-        return $this->belongsTo(Patient::class,'patient_id');
+        return $this->belongsTo(Patient::class,'user_id');
     }
-    public function employee()
-    {
-        return $this->belongsTo(Employee::class,'patient_id');
-    }
-
+    
     public function doctor()
     {
         return $this->belongsTo(Doctor::class,'doctor_id');
     }
-
-    public function card()
+    public function employee()
     {
-        return $this->belongsTo(Card::class,'patient_id');
+        return $this->belongsTo(Employee::class,'patient_id');
     }
 
 }

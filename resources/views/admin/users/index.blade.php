@@ -4,29 +4,16 @@
 @endsection
 @section('content')
     <div class="row">
-        <div class="col-md-3">
-            <p>
-                <a href="{{ route('admin.users.create') }}" class="btn btn-primary ml-5">{!! Helper::uppercase('Add New User') !!}</a>
-            </p>
-        </div>
-        <div class="col-md-9" style="text-align: right !impotant">
-            <form method="GET" action="{{ route('admin.users.index') }}" class="gy-1 gx-1">
-                <x-search /> 
-            </form>
+        <div class="col-6">
+            <a href="{{ route('admin.users.create') }}" class="btn btn-info">{!! Helper::uppercase('Add New User') !!}</a>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-            <div id="result">
 
-            </div>
-        </div>
-    </div>
-    <h3 class="text text-primary text-center mt-5">List of user</h3>
+    <h3 class="text text-info text-center">List of User</h3>
     <div class="row">
         <div class="col-12">
-            <table class="table table-bordered">
-                <thead>
+            <table id="dataTable" class="table table-bordered table-striped table-sm table-hover">
+                <thead class="text-wrap bg-dark text-white align-middle  font-bold">
                     <tr>
                         <th>User Id </th>
                         <th>Card No </th>
@@ -34,7 +21,7 @@
                         <th>Email</th>
                         <th>Role</th>
                         <th>Status</th>
-                        <th colspan="2">Action</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -85,43 +72,12 @@
                                 </form>
                             </td>
                             <td>
-                                <a class="btn btn-info" href="{{ route('admin.users.show', $user->id) }}"> 
-                                    <i class="far fa-eye"></i>
-                                </a>
-                            </td>
-                            <td>
-                                <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" value="" class="btn btn-danger">
-                                        <i class="far fa-trash-alt"></i>
-                                    </button>
-                                </form>
+                                <a class="btn btn-info" href="{{ route('admin.users.show', $user->id) }}"> <i class="far fa-eye"></i></a>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-            <div>
-                <div class="pagination justify-content-center">
-                    {{ $users->links() }}
-                </div>
-            </div>
         </div>
     </div>
-@endsection
-
-@section('singlePageScript')
-    {{-- <script>
-        $('#userCalBtn').click(function(){
-            $.ajax({
-                url: '{{ route('admin.users.calculate') }}',
-                method: 'GET',
-                cache: false,
-                success: function(data){
-                    $('#result').html(data);
-                }
-            });
-        });
-    </script> --}}
 @endsection

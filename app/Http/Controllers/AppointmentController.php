@@ -2,93 +2,56 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\Status;
 use App\Models\Appointment;
+use App\Models\Card;
 use App\Models\Doctor;
-use App\Models\Patient;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         $pageLimit = $request->per_page ?? 5;
         $user_id = auth()->user()->id;
         $data['title'] = "Appointment Details";
-        $data['appointments'] = Appointment::where('user_id',$user_id)->with('user','card')->latest()->paginate($pageLimit);
-        $data['appointmentsInActives'] = Appointment::where('status','INACTIVE')->with('patient','doctor')->latest()->paginate($pageLimit);
-        return view('frontEnd.appointments.index',$data);
+        $data['card'] = Card::first();
+        $data['appointments'] = Appointment::where('patient_id',$user_id)->latest()->paginate($pageLimit);
+        return view('frontEnd.appointments.index',$data)->with('id',(request()->input('page', 1) - 1) * $pageLimit);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create(Doctor $doctor)
     {
-        $data['doctors'] = $doctor->select('id','name')->with('user')->whereHas('user',function($q) use($doctor){
-            $q->where('id',$doctor);
-        })->get();
+        $data['doctors'] = User::where('roles','Doctor')->get();
         $data['user'] = auth()->user()->id;
 
-        return view('frontEnd.appointments.create',$data);
+        return view('frontEnd.appointments.create', $data)->with('success','Your Appointment has been created successfully');
     }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $appoint = new Appointment();
-        dd($appoint);
-        $appoint->user_id = $request->input('user_id');
+        $appoint->doctor_id = $request->input('doctor_id');
         $appoint->patient_id = $request->user()->id;
         $appoint->date = $request->input('date');
         $appoint->time = $request->input('time');
         $appoint->save();
 
-        return redirect()->back()->with('status','Appointments created successfully');
+        return redirect()->back()->with('status', 'Appointments created successfully');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Appointment  $appointment
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
-        $data['appointment'] = Appointment::with('patient','doctor')->find($id);
-        return view('frontEnd.appointments.show',$data);
+        $data['appointment'] = Appointment::with('user')->find($id);
+        return view('frontEnd.appointments.show', $data);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Appointment  $appointment
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Appointment $appointment)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Appointment  $appointment
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Appointment $appointment)
     {
         $input = $request->all();
@@ -97,12 +60,6 @@ class AppointmentController extends Controller
         return redirect()->route('appointment.index')->with('status', 'success');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Appointment  $appointment
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Appointment $appointment)
     {
         //
@@ -110,14 +67,13 @@ class AppointmentController extends Controller
 
     public function updateStatus(Request $request, Appointment $appointment)
     {
-            $status = $request->status;
-            if($status == 'ACTIVE' || $status == 'INACTIVE'){
+        $status = $request->status;
+        if ($status == 'ACTIVE' || $status == 'INACTIVE') {
             $appointment->status = $status;
             $appointment->save();
-                return redirect()->back()->with('status', 'Status has been updated.');
-            }else{
-                return redirect()->with('error','Invalid Status');
+            return redirect()->back()->with('status', 'Status has been updated.');
+        } else {
+            return redirect()->with('error', 'Invalid Status');
         }
     }
-
 }

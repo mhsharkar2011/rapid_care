@@ -23,36 +23,33 @@ class DoctorController extends Controller
         return view('admin.doctors.index',$data)->with('id',(request()->input('page', 1) - 1) * $pageLimit);
     }
 
-    public function create()
-    {
-        return view('admin.doctors.create');
-    }
+    // public function create()
+    // {
+    //     return view('admin.doctors.create');
+    // }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'phone' => 'required',
-        ]);
+    // public function store(Request $request)
+    // {
+    //     $request->validate([
+    //         'name' => 'required',
+    //         'phone' => 'required',
+    //     ]);
 
-        $doctorObj = new Doctor();
+    //     $doctorObj = new Doctor();
 
-        if($request->hasFile('avatar')){
-            $image = $request->file('avatar');
-            $name = time().'.'.$image->getClientOriginalExtension();
-            $path = public_path('/upload/doctors');
-            $image->move($path, $name);
-            $doctorObj->avatar = $name;
-        }
-        $doctorObj->name = $request->name;
-        $doctorObj->phone = $request->phone;
-        $doctorObj->specialization = $request->specialization;
-        $doctorObj->dob = $request->password;
-        $doctorObj->status = $request->status;
-        $doctorObj->save();
+    //     if($request->hasFile('avatar')){
+    //         $image = $request->file('avatar');
+    //         $name = time().'.'.$image->getClientOriginalExtension();
+    //         $path = public_path('/upload/doctors');
+    //         $image->move($path, $name);
+    //         $doctorObj->avatar = $name;
+    //     }
+    //     $doctorObj->name = $request->name;
+    //     $doctorObj->phone = $request->phone;
+    //     $doctorObj->save();
 
-        return redirect()->route('admin.doctors.index')->with('success', 'Doctor Added Successfully');
-    }
+    //     return redirect()->route('admin.doctors.index')->with('success', 'Doctor Added Successfully');
+    // }
 
     public function show(Doctor $doctor)
     {
@@ -86,16 +83,11 @@ class DoctorController extends Controller
 
     public function destroy(Doctor $doctor)
     {
+        $avatarPath = 'public/doctors/avatars/'.$doctor->avatar;
+        if (Storage::exists($avatarPath)) {
+            Storage::delete($avatarPath); // Use Storage::delete for better file management
+        }
         $doctor->delete();
-        return redirect()->route('admin.doctors.index');
-    }
-
-    public function calDoctor(){
-        $data = [];
-        $data['pubDoctorr'] = Doctor::where('status', 'Publish')->count();
-        $data['unpubDoctor'] = Doctor::where('status', 'Unpublish')->count();
-        $data['totalDoctors'] = Doctor::where('role_id','1')->count();
-
-        return view('admin.doctors.calDoctor', $data);
+        return redirect()->route('admin.doctors.index')->with('success', 'Doctor Deleted Successfully');
     }
 }

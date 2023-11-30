@@ -8,15 +8,10 @@
         </li>
         {{-- User Menu --}}
         @auth
-        <li class="nav-item dropdown {{ Request::is('admin/users*','admin/users/create') ? 'active':'' }}">
-          <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Users</span>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            <a class="dropdown-item" href="{{ route('admin.users.index') }}">All User</a>
-            <a class="dropdown-item" href="{{ route('admin.users.create') }}">Add New User</a>
-          </div>
+        <li class="nav-item {{ Request::is('admin/users*','admin/users/create') ? 'active':'' }}">
+          <a class="nav-link" href="{{ route('admin.users.index') }}">
+            <i class="fas fa-fw fa-user"></i>
+          <span>Users</span></a>
         </li>
         <li class="nav-item {{ Request::is('admin/employees*')?'active':'' }}">
           <a class="nav-link" href="{{ route('admin.employees.index') }}">

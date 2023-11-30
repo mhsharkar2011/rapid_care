@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Patient;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -16,24 +14,26 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $data['title'] = "Login Page";
-        if (Auth::check() && $request->user()->hasRole('admin')) {
-            return redirect()->route('admin.dashboard');
-        }
-        // elseif(Auth::check() && $request->user()->hasRole('patient')){
-        //     return redirect()->route('patient.dashboard');
-        // }
-        // elseif(Auth::check() && $request->user()->hasRole('doctor')){
-        //     return redirect()->route('doctor.dashboard');
-        // }
-        // elseif(Auth::check() && $request->user()->hasRole('employee')){
-        //     return redirect()->route('employee.dashboard');
-        // }
-        else {
+        if (Auth::check()) {
+            return redirect()->route($this->getDashboard());
+        } else {
             return view('admin.login', $data);
         }
     }
 
-    public function storeLogin(Request $request)
+    private function getDashboard(){
+        $role = Auth::user()->role;
+
+        return match ($role) {
+            'Admin' => 'admin.dashboard',
+            'Patient' => 'patient.dashboard',
+            'Doctor' => 'doctor.dashboard',
+            'Employee' => 'employee.dashboard',
+            default => 'home', // Adjust the default route as needed
+        };
+    }
+
+    public function frontEndLogin(Request $request)
     {
         $validator =  Validator::make($request->all(), [
             'email' => 'required',

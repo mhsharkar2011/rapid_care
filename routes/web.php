@@ -20,7 +20,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
 Route::get('/', 'frontEndController@index')->name('frontEnd.home');
 Route::prefix('frontEnd')->name('frontEnd.')->group(function (){
     Route::get('login','AuthController@login')->name('login');
-    Route::post('login','AuthController@storeLogin')->name('storeLogin');
+    Route::post('login','AuthController@frontEndLogin')->name('frontEndLogin');
     Route::get('register', 'AuthController@register')->name('register');
     Route::post('register', 'AuthController@storeRegister')->name('storeRegister');
     Route::get('about','frontEndController@about')->name('about');

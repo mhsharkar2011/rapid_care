@@ -9,7 +9,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header text-dark">
-                        <h1>Appointment Details of - {{ ucwords($appointment->pUser->patient->name) }}</h1>
+                        <h1>Appointment Details of - {{ ucwords($appointment->pUser->name ??'') }}</h1>
                     </div>
 
                     <div class="card-body">
@@ -18,16 +18,16 @@
                                 <div class="row">
                                     <div class="col-sm-9">
                                         <div class="d-flex flex-column">
-                                         <span><strong>Patient Card No:</strong> {{ $appointment->card->card_no }}</span>
-                                         <span><strong>Patient Name:</strong> {{ $appointment->pUser->patient->name }}</span>
-                                         <span><strong>Patient Email:</strong> {{ $appointment->pUser->email }}</span>
-                                         <span><strong>Date of Birth:</strong> {{ $appointment->pUser->patient->dob }}</span>
-                                         <span><strong>Gender:</strong> {{ $appointment->pUser->patient->gender }}</span>
+                                         <span><strong>Patient Card No:</strong> {{ $appointment->card->card_no ?? '' }}</span>
+                                         <span><strong>Patient Name:</strong> {{ $appointment->pUser->name ?? '' }}</span>
+                                         <span><strong>Patient Email:</strong> {{ $appointment->pUser->email ?? '' }}</span>
+                                         
+                                         {{-- <span><strong>Gender:</strong> {{ $appointment->pUser->patient->gender }}</span> --}}
                                         </div>
                                      </div>
                                      <div class="col-md-3">
                                          <div class="text-center">
-                                             <x-patient-avatar :user="$appointment->pUser->patient->avatar" width="80px" heith="80px"></x-patient-avatar>
+                                             <x-patient-avatar :user="$appointment->avatar" width="80px" heith="80px"></x-patient-avatar>
                                          </div>
                                      </div>
                                 </div>
@@ -54,7 +54,7 @@
                                 <td><a class="btn btn-info" href="#">Approved</a></td>
                             </div>
                             <div class="col-lg-6">
-                                <form action="{{ route('admin.appointments.destroy', $appointment->pUser->patient->id) }}" method="POST">
+                                <form action="{{ route('admin.appointments.destroy', $appointment->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger">Delete</button>
