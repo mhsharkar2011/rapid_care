@@ -26,31 +26,11 @@
                                 <td class="text-center">{{ $appoint->date}}</td>
                                 <td class="text-center">{{ Carbon\Carbon::parse($appoint->time)->format('h:i A')}}</td>
                                 <td class="text-center">{{ $appoint->dUser->name ?? ''}}</td>
-                                <td>
-                                    <form action="{{ route('frontEnd.appointments.update-status', $appoint->id) }}" method="POST">
-                                        @csrf
-                                        @method('PUT')
-                                        <div>
-                                            <select style="display:none" name="status" id="status"
-                                                class="badge bg-inverse-primary ml-2">
-                                                @if ($appoint->status == 'Active')
-                                                    <div class=" badge bg-inverse-success ml-2">
-                                                        <option value="INACTIVE" {{ $appoint->status == 'Inactive' ? 'selected' : '' }} ></option>
-                                                    </div>
-                                                @else
-                                                    <option value="ACTIVE" {{ $appoint->status == 'Active' ? 'selected' : '' }}></option>
-                                                @endif
-                                            </select>
-                                        </div>
-                                        <button type="submit" class="btn">
-                                            @if ($appoint->status == 'Active')
-                                                <span class="text-success">Pending</span>
-                                            @else
-                                                <span class="bg-inverse-dark text-warning">Approved</span>
-                                            @endif
-                                        </button>
-                                    </form>
-                                </td>
+                                @if ($appoint->status == "Active")
+                                <td class="text-center text-success">{{ $appoint->status ? 'Approved':''}}</td>
+                                @elseif ($appoint->status == "Inactive")
+                                <td class="text-center text-warning">{{ $appoint->status ? 'Pending':''}}</td>
+                                @endif
                                 <td class="text-center">
                                     <a href="{{ route('frontEnd.appointments.show', $appoint->id) }}"><i class="far fa-eye"></i></a>
                                 </td>

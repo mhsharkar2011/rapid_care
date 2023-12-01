@@ -25,14 +25,14 @@
                     </tr>
                 </thead>
                 <tbody class="text-center text-wrap">
-                @forelse ($appointments as $key=>$appoint)
+                @forelse ($appointPending as $key=>$appoint)
                     <tr>
                         <td>{{ ++$key }}</td>
                         <td>{{ $appoint->card->card_no ?? '' }}</td>
                         <td>{{ $appoint->pUser->name ?? '' }}</td>
                         <td>{{ $appoint->date }}</td>
                         <td>{{ Carbon\Carbon::parse($appoint->time)->format('h:i A') }}</td>
-                        <td>{{ $appoint->dUser->doctor->name ?? '' }}</td>
+                        <td>{{ $appoint->dUser->name ?? '' }}</td>
                         <td>
                             <form action="{{ route('frontEnd.appointments.update-status', $appoint->id) }}" method="POST">
                                 @csrf
@@ -40,20 +40,16 @@
                                 <div>
                                     <select style="display:none" name="status" id="status"
                                         class="badge bg-inverse-primary ml-2">
-                                        @if ($appoint->status == 'Active')
+                                        @if ($appoint->status == 'Inactive')
                                             <div class=" badge bg-inverse-success ml-2">
-                                                <option value="INACTIVE" {{ $appoint->status == 'Inactive' ? 'selected' : '' }} ></option>
+                                                <option value="ACTIVE" {{ $appoint->status == 'Active' ? 'selected' : '' }} ></option>
                                             </div>
-                                        @else
-                                            <option value="ACTIVE" {{ $appoint->status == 'Active' ? 'selected' : '' }}></option>
                                         @endif
                                     </select>
                                 </div>
                                 <button type="submit" class="btn">
-                                    @if ($appoint->status == 'Active')
+                                    @if ($appoint->status == 'Inactive')
                                         <span class=" text-warning">Pending</span>
-                                    @else
-                                        <span class="bg-inverse-dark text-warning">Approved</span>
                                     @endif
                                 </button>
                             </form>
@@ -87,7 +83,7 @@
                     </tr>
                 </thead>
                 <tbody class="text-center text-wrap">
-                @forelse ($appointments as $key=>$appoint)
+                @forelse ($appointApproved as $key=>$appoint)
                     <tr>
                         <td>{{ ++$key }}</td>
                         <td>{{ $appoint->card->card_no ?? '' }}</td>

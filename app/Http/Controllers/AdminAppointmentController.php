@@ -10,10 +10,10 @@ class AdminAppointmentController extends Controller
 {
     public function index(Request $request)
     {
-        $pageLimit = $request->per_page ?? 5;
+        // $pageLimit = $request->per_page;
         $data['title'] = "Appointment Details";
-        $data['appointPending'] = Appointment::where('status', 'Inactive')->with('pUser', 'dUser', 'card')->orderByRaw('id DESC')->paginate($pageLimit);
-        $data['appointApproved'] = Appointment::where('status', 'Active')->with('pUser', 'dUser', 'card')->orderByRaw('id DESC')->paginate($pageLimit);
+        $data['appointPending'] = Appointment::where('status', 'Inactive')->with('pUser', 'dUser', 'card')->orderByRaw('id DESC')->get();
+        $data['appointApproved'] = Appointment::where('status', 'Active')->with('pUser', 'dUser', 'card')->orderByRaw('id DESC')->get();
         return view('admin.appointments.index', $data);
     }
 

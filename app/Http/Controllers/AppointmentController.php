@@ -12,7 +12,7 @@ class AppointmentController extends Controller
 {
     public function index(Request $request)
     {
-        $pageLimit = $request->per_page ?? 5;
+        $pageLimit = $request->per_page ?? 15;
         $user_id = auth()->user()->id;
         $data['title'] = "Appointment Details";
         $data['card'] = Card::first();

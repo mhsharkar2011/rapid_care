@@ -23,12 +23,17 @@
     </div>
     <div class="card-footer text-muted">
      <strong>Last Visited Doctor: </strong>
-        @php
-        use Carbon\Carbon;
-            $firstVisited = Carbon::parse($appointment->date);
-            $visited = $firstVisited->diffInDays(Carbon::now());
-        @endphp
-        <strong class="text-info" style="font-size: 22px" > &nbsp;{{ $visited }}</strong> <strong>Days Ago</strong>
+     @php
+     use Carbon\Carbon;
+     $firstVisited = Carbon::parse($appointment->date);
+     $now = Carbon::now();
+     $difference = $now->diff($firstVisited);
+ @endphp
+ 
+ <strong class="text-info" style="font-size: 22px">
+     {{ $difference->format('%y years, %m months, %d days') }}
+ </strong>
+ <strong>Ago</strong>
     </div>
   </div>
     </div>

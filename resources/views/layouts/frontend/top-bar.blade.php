@@ -24,19 +24,14 @@
                     </div>
                @endif
                
-               @if (Route::is('frontEnd.appointments.index'))
-                    <div class="me-3 pe-3 border-end py-2">
-                        <p class="m-0"><i class="fa fa-user-group me-2"></i>Profile</p>
-                    </div>
-               @endif
-
+               
                @if (Route::is('frontEnd.appointments.show'))
                     <div class="me-3 pe-3 border-end py-2">
                         <p class="m-0"><i class="fa fa-user-group me-2"></i> Profile </p>
                     </div>
                @endif
                 <div class="me-3 pe-3 py-2 px-0">
-                    <p class="m-0"><i class="fa fa-user-group me-2"></i><a class="text-white" href="{{ route('frontEnd.logout') }}">Logout</a></p>
+                    <a class="text-white" href="{{ route('frontEnd.logout') }}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
                 </div>
             </div>
         </div>
