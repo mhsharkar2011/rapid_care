@@ -1,26 +1,14 @@
 <?php
-
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'App\Http\Controllers'], function()
 { 
 
-
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-
-//Public APIs ===========================================================================================================
-
-
-// Frontend Public APIs ===========================================================================================================
+// Frontend Public APIs ===================================================================
 Route::get('/', 'frontEndController@index')->name('frontEnd.home');
 Route::prefix('frontEnd')->name('frontEnd.')->group(function (){
-    Route::get('login','AuthController@login')->name('login');
-    Route::post('login','AuthController@frontEndLogin')->name('frontEndLogin');
+    Route::get('login','AuthController@frontEndLogin')->name('login');
+    Route::post('login','AuthController@frontEndLoginStore')->name('loginStore');
     Route::get('register', 'AuthController@register')->name('register');
     Route::post('register', 'AuthController@storeRegister')->name('storeRegister');
     Route::get('about','frontEndController@about')->name('about');
@@ -47,12 +35,12 @@ Route::group(['middleware'=>['auth']], function() {
     });
 });
 
-// ================================== Backend Public APIs ======================================================
+// Backend Public APIs ==================================================================
 Route::prefix('admin')->name('admin.')->group(function (){
     Route::get('login','AuthController@login')->name('login');
-    Route::post('login','AuthController@adminLogin')->name('adminLogin');
-    Route::get('register', 'AuthController@adminRegister')->name('register');
-    Route::post('register', 'AuthController@AdminStoreRegister')->name('storeRegister');
+    Route::post('login','AuthController@store')->name('store');
+    Route::get('register', 'Auth\RegisterController@register')->name('register');
+    Route::post('register', 'Auth\RegisterController@registerStore')->name('store');
 });
 
 Route::group(['middleware' => ['auth']], function() {
@@ -60,7 +48,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('dashboard', 'DashboardController@index')->name('dashboard');
         Route::resource('users', 'UserController');
         Route::put('users/{user}/update-status','UserController@updateStatus')->name('users.update-status');
-        Route::get('logout', 'AdminAuthController@logout')->name('logout');
+        Route::get('logout', 'AuthController@logout')->name('logout');
         // Route::post('users', 'serController::class,'updateProfile')->name('updateProfile');
 
         Route::resource('employees', 'EmployeeController');
