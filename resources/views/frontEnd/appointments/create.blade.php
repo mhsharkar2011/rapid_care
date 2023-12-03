@@ -36,11 +36,11 @@
                                 <div class="col-12 col-sm-6">
                                     <select name="doctor_id" class="form-select bg-light border-0" style="height: 55px;">
                                         <option selected>Select Doctor</option>
+                                        @if (auth()->user()->roles != 'Doctor')
                                         @foreach ($doctors as $doctor)
-                                        @if ($doctor->id == auth()->user()->id)
                                         <option value="{{ $doctor->id}}">{{ $doctor->name}}</option>
-                                        @endif
                                         @endforeach
+                                        @endif
                                     </select>
                                 </div>
                                 <div class="col-12 col-sm-6">

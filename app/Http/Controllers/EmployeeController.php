@@ -18,36 +18,36 @@ class EmployeeController extends Controller
         return view('admin.employees.index',$data)->with('id',(request()->input('page', 1) - 1) * $pageLimit);
     }
 
-    public function create()
-    {
-        return view('admin.employees.create');
-    }
+    // public function create()
+    // {
+    //     return view('admin.employees.create');
+    // }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'phone' => 'required',
-        ]);
+    // public function store(Request $request)
+    // {
+    //     $request->validate([
+    //         'name' => 'required',
+    //         'phone' => 'required',
+    //     ]);
 
-        $employeeObj = new Employee();
+    //     $employeeObj = new Employee();
 
-        if($request->hasFile('avatar')){
-            $image = $request->file('avatar');
-            $name = time().'.'.$image->getClientOriginalExtension();
-            $path = public_path('/upload/employees');
-            $image->move($path, $name);
-            $employeeObj->avatar = $name;
-        }
-        $employeeObj->name = $request->name;
-        $employeeObj->phone = $request->phone;
-        $employeeObj->specialization = $request->specialization;
-        $employeeObj->dob = $request->password;
-        $employeeObj->status = $request->status;
-        $employeeObj->save();
+    //     if($request->hasFile('avatar')){
+    //         $image = $request->file('avatar');
+    //         $name = time().'.'.$image->getClientOriginalExtension();
+    //         $path = public_path('/upload/employees');
+    //         $image->move($path, $name);
+    //         $employeeObj->avatar = $name;
+    //     }
+    //     $employeeObj->name = $request->name;
+    //     $employeeObj->phone = $request->phone;
+    //     $employeeObj->specialization = $request->specialization;
+    //     $employeeObj->dob = $request->password;
+    //     $employeeObj->status = $request->status;
+    //     $employeeObj->save();
 
-        return redirect()->route('admin.employees.index')->with('success', 'employee Added Successfully');
-    }
+    //     return redirect()->route('admin.employees.index')->with('success', 'Employee Added Successfully');
+    // }
 
     public function show(Employee $employee)
     {
@@ -76,13 +76,17 @@ class EmployeeController extends Controller
         }
         $employee->update($input);
 
-        return redirect()->route('admin.employees.index')->with('success', 'employee Updated Successfully');
+        return redirect()->route('admin.employees.index')->with('success', 'Employee Updated Successfully');
     }
 
     public function destroy(Employee $employee)
     {
+        $avatarPath = 'public/employees/avatars/'.$employee->avatar;
+        if (Storage::exists($avatarPath)) {
+            Storage::delete($avatarPath); // Use Storage::delete for better file management
+        }
         $employee->delete();
-        return redirect()->route('admin.employees.index');
+        return redirect()->route('admin.employees.index')->with('success', 'Employee Deleted Successfully');
     }
 
     public function calEmployee(){

@@ -29,7 +29,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $pages = PageLimit(5);
+        $pages = PageLimit(15);
         $data = [];
         $users = User::with('doctor', 'patient', 'employee', 'card')->latest();
         $search = $request->input('search');

@@ -17,9 +17,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!-- Page level plugin CSS-->
-    <link href="{{ asset('customAdmin/vendor/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet">
     <!-- Datatable CSS -->
-    <link rel="stylesheet" href="{{ URL::to('assets/css/dataTables.bootstrap4.min.css') }}">
+    <link href="{{ asset('customAdmin/vendor/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="{{ asset('customAdmin/css/sb-admin.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('customAdmin/css/custom.css') }}">
@@ -71,13 +70,12 @@
     {{-- <script src="{{ asset('customAdmin/js/demo/chart-area-demo.js') }}"></script> --}}
     <script src="{{ asset('customAdmin/js/custom.js') }}"></script>
     <!-- Datatable JS -->
-    <script src="{{ URL::to('assets/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ URL::to('assets/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
     <script>
         new DataTable('#dataTable');
     </script>
+    {{-- Datatable End --}}
     @yield('singlePageScript')
 </body>
 

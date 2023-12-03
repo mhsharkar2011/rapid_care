@@ -25,30 +25,12 @@ td{
                     <td><input type="text" name="phone" class="form-control"></td>
                 </tr>
                 <tr>
-                    <td>Email</td>
-                    <td><input type="email" name="email" class="form-control"></td>
-                </tr>
-                <tr>
                     <td>Password</td>
-                    <td><input type="password" name="password" class="form-control"></td>
-                </tr>
-
-                <tr>
-                    <td>Photo</td>
-                    <td><input type="file" name="avatar" class="form-control"></td>
-                </tr>
-                <tr>
-                    <td>Status</td>
-                    <td>
-                        <select name="status" id="" class="form-control">
-                            <option value="ACTIVE">Active</option>
-                            <option value="INACTIVE">Inactive</option>
-                        </select>
-                    </td>
+                    <td><input type="password" name="password" class="form-control" value="123456"></td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><input type="submit" value="Add Doctor" name="saveDoctor" class="btn btn-primary"></td>
+                    <td><input type="submit" value="Add Doctor" name="saveDoctor" class="btn btn-info"></td>
                 </tr>
             </table>
         </form>

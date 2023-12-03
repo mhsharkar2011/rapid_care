@@ -3,44 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
-use App\Models\Card;
-use App\Models\Doctor;
-use App\Models\Patient;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminAppointmentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
-        $pageLimit = $request->per_page ?? 5;
+        // $pageLimit = $request->per_page;
         $data['title'] = "Appointment Details";
-        $data['appointments'] = Appointment::where('status','Active')->with('pUser','dUser','card')->orderByRaw('id DESC')->paginate($pageLimit);
-        return view('admin.appointments.index',$data);
+        $data['appointPending'] = Appointment::where('status', 'Inactive')->with('pUser', 'dUser', 'card')->orderByRaw('id DESC')->get();
+        $data['appointApproved'] = Appointment::where('status', 'Active')->with('pUser', 'dUser', 'card')->orderByRaw('id DESC')->get();
+        return view('admin.appointments.index', $data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create(User $user)
     {
         $data['users'] = $user->select('*')->get();
-        return view('admin.appointments.create',$data);
+        return view('admin.appointments.create', $data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $appoint = new Appointment();
@@ -49,53 +31,15 @@ class AdminAppointmentController extends Controller
         $appoint->date = $request->input('date');
         $appoint->time = $request->input('time');
         $appoint->save();
-
         return redirect()->route('admin.appointments.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        // $data['appoint'] =$appoint->with('patient','doctor')->get();
-        // $data['appointments'] = $appoint->with('patient','doctor')->get();
-        $data['appointment'] = Appointment::with('patient','doctor','card')->find($id);
-        return view('admin.appointments.show',$data);
+        $data['appointment'] = Appointment::with('pUser', 'dUser', 'patient', 'card')->find($id);
+        return view('admin.appointments.show', $data);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $appointment = Appointment::findOrFail($id);

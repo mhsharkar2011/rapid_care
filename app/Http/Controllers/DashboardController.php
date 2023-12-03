@@ -6,9 +6,9 @@ use App\Models\Appointment;
 use App\Models\Doctor;
 use App\Models\Employee;
 use App\Models\Patient;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -17,84 +17,17 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, User $user)
+    public function index()
     {
         $data = [];
-        // $user = $user->all();
-        $data['user'] = $user->id;
-        $data['totalDoctors'] = Doctor::all()->count();
-        $data['totalPatients'] = Patient::all()->count();
-        $data['totalAppointments'] = Appointment::all()->count();
-        $data['totalEmployees'] = User::with('employee')->where('status','Active')->whereHas('employee',function($q){
-            $q->where('roles','employee');
-        })->count();
-        $data['totalActiveAppointments'] = Appointment::where('status','Active')->count();
+        $data['user'] = auth()->user()->id;
+        $data['totalEmployees'] = Employee::count();
+        $data['totalDoctors'] = Doctor::count();
+        $data['totalPatients'] = Patient::count();
+        $data['totalAppointments'] = Appointment::count();
+        $data['totalAppointPending'] = Appointment::where('status','Inactive')->count();
+        $data['totalAppointApproved'] = Appointment::where('status','Active')->count();
+        $data['totalTransaction'] = Transaction::count();
         return view('admin.dashboard', $data);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
