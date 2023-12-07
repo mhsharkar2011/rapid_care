@@ -12,10 +12,10 @@ class AuthController extends Controller
 {
     public function login(Request $request)
     {
-        if (Auth::check() && $request->user()->hasRole('admin')) {
-            return redirect()->route('admin.dashboard');
+        if (Auth::check()) {
+            return redirect()->route('frontEnd.home');
         } else {
-            return view('login');
+            return view('auth.login');
         }
     }
 
@@ -32,15 +32,19 @@ class AuthController extends Controller
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('frontEnd.appointments.index');
         } else {
-            return redirect()->route('login');
+            return redirect()->route('frontEnd.login');
         }
     }
 
+    public function registerStore()
+    {
+       //
+    }
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('login');
+        return redirect()->route('frontEnd.home');
     }
 }
