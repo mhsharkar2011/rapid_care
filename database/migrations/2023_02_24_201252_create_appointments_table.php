@@ -20,7 +20,7 @@ class CreateAppointmentsTable extends Migration
             $table->unsignedBigInteger('patient_id');
             $table->date('date');
             $table->time('time');
-            $table->enum('status',[Status::ACTIVE, Status::INACTIVE])->default(Status::ACTIVE);
+            $table->enum('status',[Status::ACTIVE, Status::INACTIVE])->default(Status::INACTIVE);
             $table->timestamps();
         });
     }
