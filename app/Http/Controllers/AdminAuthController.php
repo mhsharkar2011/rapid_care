@@ -13,7 +13,7 @@ class AdminAuthController extends Controller
         if (Auth::check() && $request->user()->hasRole('admin')) {
             return redirect()->route('admin.dashboard');
         } else {
-            return view('auth.login');
+            return view('login');
         }
     }
 
@@ -32,7 +32,7 @@ class AdminAuthController extends Controller
         if (Auth::attempt($credentails)) {
             return redirect()->route('admin.dashboard');
         } else {
-            return redirect()->route('auth.login');
+            return redirect()->route('admin.store');
         }
     }
 

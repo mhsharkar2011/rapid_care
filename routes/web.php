@@ -38,9 +38,9 @@ Route::group(['middleware'=>['auth']], function() {
 // Backend Public APIs ==================================================================
 Route::prefix('admin')->name('admin.')->group(function (){
     Route::get('login','AdminAuthController@login')->name('login');
-    Route::post('login','AdminAuthController@store')->name('store');
+    Route::post('login','AdminAuthController@store')->name('login.store');
     Route::get('register', 'AdminAuthController@register')->name('register');
-    Route::post('register', 'AdminAuthController@store')->name('store');
+    Route::post('register', 'AdminAuthController@store')->name('register.store');
 });
 
 Route::group(['middleware' => ['auth']], function() {
