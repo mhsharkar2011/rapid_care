@@ -2,15 +2,15 @@
 use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'App\Http\Controllers'], function()
-{ 
+{
 
 // Frontend Public APIs ===================================================================
 Route::get('/', 'frontEndController@index')->name('frontEnd.home');
 Route::prefix('frontEnd')->name('frontEnd.')->group(function (){
-    Route::get('login','AuthController@frontEndLogin')->name('login');
-    Route::post('login','AuthController@frontEndLoginStore')->name('loginStore');
+    Route::get('login','AuthController@login')->name('login');
+    Route::post('login','AuthController@store')->name('login.store');
     Route::get('register', 'AuthController@register')->name('register');
-    Route::post('register', 'AuthController@storeRegister')->name('storeRegister');
+    Route::post('register', 'AuthController@registerStore')->name('register.store');
     Route::get('about','frontEndController@about')->name('about');
     Route::get('doctors','frontEndController@doctors')->name('doctors');
     Route::get('services','frontEndController@services')->name('services');
@@ -37,10 +37,10 @@ Route::group(['middleware'=>['auth']], function() {
 
 // Backend Public APIs ==================================================================
 Route::prefix('admin')->name('admin.')->group(function (){
-    Route::get('login','AuthController@login')->name('login');
-    Route::post('login','AuthController@store')->name('store');
-    Route::get('register', 'Auth\RegisterController@register')->name('register');
-    Route::post('register', 'Auth\RegisterController@registerStore')->name('store');
+    Route::get('login','AdminAuthController@login')->name('login');
+    Route::post('login','AdminAuthController@store')->name('login.store');
+    Route::get('register', 'AdminAuthController@register')->name('register');
+    Route::post('register', 'AdminAuthController@store')->name('register.store');
 });
 
 Route::group(['middleware' => ['auth']], function() {
@@ -48,7 +48,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('dashboard', 'DashboardController@index')->name('dashboard');
         Route::resource('users', 'UserController');
         Route::put('users/{user}/update-status','UserController@updateStatus')->name('users.update-status');
-        Route::get('logout', 'AuthController@logout')->name('logout');
+        Route::get('logout', 'AdminAuthController@logout')->name('logout');
         // Route::post('users', 'serController::class,'updateProfile')->name('updateProfile');
 
         Route::resource('employees', 'EmployeeController');

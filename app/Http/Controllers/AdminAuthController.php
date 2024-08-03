@@ -32,13 +32,13 @@ class AdminAuthController extends Controller
         if (Auth::attempt($credentails)) {
             return redirect()->route('admin.dashboard');
         } else {
-            return redirect()->route('login');
+            return redirect()->route('admin.store');
         }
     }
 
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('login');
+        return redirect()->route('admin.login');
     }
 }
