@@ -13,9 +13,42 @@ class AdminAuthController extends Controller
         if (Auth::check() && $request->user()->hasRole('admin')) {
             return redirect()->route('admin.dashboard');
         } else {
-            return view('auth.login');
+            return view('login');
         }
     }
+
+    public function loginStore(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+        ]);
+
+        $credentials = $request->only('email', 'password');
+        $remember = $request->has('remember');
+
+        if (Auth::attempt($credentials, $remember)) {
+            $request->session()->regenerate();
+
+            // Check if user is admin
+            $user = Auth::user();
+            if ($user->role === 'admin' || $user->is_admin) {
+                return redirect()->route('admin.dashboard')
+                    ->with('success', 'Welcome back, ' . $user->name . '!');
+            }
+
+            // If not admin, logout and redirect back
+            Auth::logout();
+            return back()->withErrors([
+                'email' => 'You do not have admin access.',
+            ]);
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
+    }
+
 
     public function store(Request $request)
     {
@@ -32,7 +65,7 @@ class AdminAuthController extends Controller
         if (Auth::attempt($credentails)) {
             return redirect()->route('admin.dashboard');
         } else {
-            return redirect()->route('auth.login');
+            return redirect()->route('admin.store');
         }
     }
 
