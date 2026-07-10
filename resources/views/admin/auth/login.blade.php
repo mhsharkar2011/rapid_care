@@ -3,49 +3,37 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>{{ $title ?? 'Admin Login - Rapid Care' }}</title>
+    <title>Admin Login - Rapid Care</title>
 
     <!-- Favicon -->
     <link href="{{ asset('img/favicon.ico') }}" rel="icon">
 
-    <!-- Google Web Fonts -->
-    <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Libraries Stylesheet -->
-    <link href="{{ asset('lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('lib/animate/animate.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('lib/twentytwenty/twentytwenty.css') }}" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-
-    <!-- Custom Stylesheet -->
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-
-    <!-- Custom Login Styles -->
     <style>
         /* ============================================
-        LOGIN PAGE - BLACK THEME
+        ADMIN LOGIN PAGE - BLACK THEME
         ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             background: #0a0a0a;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Inter', 'Open Sans', sans-serif;
+            font-family: 'Inter', sans-serif;
             padding: 1.5rem;
             position: relative;
             overflow: hidden;
@@ -134,13 +122,6 @@
             border-radius: 50%;
             animation: floatParticle 20s ease-in-out infinite;
         }
-
-        .particle:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; width: 6px; height: 6px; }
-        .particle:nth-child(2) { top: 30%; right: 15%; animation-delay: -3s; }
-        .particle:nth-child(3) { bottom: 25%; left: 10%; animation-delay: -6s; width: 5px; height: 5px; }
-        .particle:nth-child(4) { bottom: 40%; right: 20%; animation-delay: -9s; }
-        .particle:nth-child(5) { top: 50%; left: 5%; animation-delay: -12s; width: 3px; height: 3px; }
-        .particle:nth-child(6) { top: 70%; right: 5%; animation-delay: -15s; }
 
         @keyframes floatParticle {
             0%, 100% {
@@ -272,7 +253,6 @@
             gap: 1.25rem;
         }
 
-        /* Form Groups */
         .form-group {
             position: relative;
         }
@@ -336,7 +316,6 @@
             -webkit-text-fill-color: #ffffff !important;
         }
 
-        /* Password Toggle */
         .password-toggle {
             display: flex;
             align-items: center;
@@ -359,7 +338,6 @@
             stroke: currentColor;
         }
 
-        /* Remember Me */
         .form-options {
             display: flex;
             align-items: center;
@@ -409,7 +387,6 @@
             color: #a78bfa;
         }
 
-        /* Buttons */
         .btn-primary-custom {
             display: inline-flex;
             align-items: center;
@@ -450,14 +427,7 @@
             box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
         }
 
-        .btn-primary-custom:active {
-            transform: translateY(0);
-        }
-
         .btn-primary-custom svg {
-            width: 20px;
-            height: 20px;
-            stroke: currentColor;
             transition: transform 0.3s ease;
         }
 
@@ -491,12 +461,6 @@
             transform: translateY(-3px);
         }
 
-        .btn-secondary-custom svg {
-            width: 18px;
-            height: 18px;
-            stroke: currentColor;
-        }
-
         .btn-group {
             display: flex;
             flex-direction: column;
@@ -504,7 +468,6 @@
             margin-top: 0.5rem;
         }
 
-        /* Divider */
         .divider {
             display: flex;
             align-items: center;
@@ -527,7 +490,6 @@
             white-space: nowrap;
         }
 
-        /* Footer */
         .login-footer {
             text-align: center;
             margin-top: 2rem;
@@ -550,14 +512,41 @@
             color: #a78bfa;
         }
 
-        /* ============================================
-        RESPONSIVE
-        ============================================ */
-        @media (max-width: 480px) {
-            body {
-                padding: 1rem;
-            }
+        .alert-danger {
+            background: rgba(248, 113, 113, 0.1);
+            border: 1px solid rgba(248, 113, 113, 0.2);
+            color: #f87171;
+            border-radius: 0.75rem;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+        }
 
+        .alert-danger ul {
+            margin: 0;
+            padding-left: 1.25rem;
+        }
+
+        .form-control.is-invalid {
+            border-color: #f87171 !important;
+        }
+
+        .text-red-400 {
+            color: #f87171;
+        }
+
+        .text-xs {
+            font-size: 0.75rem;
+        }
+
+        .mt-1 {
+            margin-top: 0.25rem;
+        }
+
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 480px) {
             .login-card {
                 padding: 1.75rem;
                 border-radius: 1.5rem;
@@ -614,56 +603,6 @@
                 height: 48px;
                 font-size: 1.4rem;
             }
-        }
-
-        /* Error Messages */
-        .alert-danger {
-            background: rgba(248, 113, 113, 0.1);
-            border: 1px solid rgba(248, 113, 113, 0.2);
-            color: #f87171;
-            border-radius: 0.75rem;
-            padding: 0.75rem 1rem;
-            font-size: 0.9rem;
-        }
-
-        .alert-danger ul {
-            margin: 0;
-            padding-left: 1.25rem;
-        }
-
-        .alert-success {
-            background: rgba(52, 211, 153, 0.1);
-            border: 1px solid rgba(52, 211, 153, 0.2);
-            color: #34d399;
-            border-radius: 0.75rem;
-            padding: 0.75rem 1rem;
-            font-size: 0.9rem;
-        }
-
-        /* Validation Error Styles */
-        .form-control.is-invalid {
-            border-color: #f87171 !important;
-        }
-
-        .form-control.is-invalid:focus {
-            border-color: #f87171 !important;
-            box-shadow: 0 0 0 4px rgba(248, 113, 113, 0.1) !important;
-        }
-
-        .text-red-400 {
-            color: #f87171;
-        }
-
-        .text-xs {
-            font-size: 0.75rem;
-        }
-
-        .mt-1 {
-            margin-top: 0.25rem;
-        }
-
-        .mb-4 {
-            margin-bottom: 1rem;
         }
     </style>
 </head>
@@ -810,12 +749,10 @@
         </div>
     </div>
 
-    <!-- ============================================
-    JAVASCRIPT
-    ============================================ -->
+    <!-- JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // ===== Password Toggle =====
+            // Password Toggle
             const togglePassword = document.getElementById('togglePassword');
             const passwordInput = document.getElementById('password');
 
@@ -824,7 +761,6 @@
                     const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
                     passwordInput.setAttribute('type', type);
 
-                    // Update icon
                     const icon = this.querySelector('svg');
                     if (type === 'text') {
                         icon.innerHTML = `
@@ -836,35 +772,6 @@
                             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
                             <circle cx="12" cy="12" r="3"/>
                         `;
-                    }
-                });
-            }
-
-            // ===== Form Validation Feedback =====
-            const form = document.querySelector('.login-form');
-            if (form) {
-                form.addEventListener('submit', function(e) {
-                    const email = this.querySelector('input[name="email"]');
-                    const password = this.querySelector('input[name="password"]');
-
-                    if (email && !email.value.trim()) {
-                        e.preventDefault();
-                        email.focus();
-                        email.style.borderColor = '#f87171';
-                        setTimeout(() => {
-                            email.style.borderColor = '';
-                        }, 3000);
-                        return;
-                    }
-
-                    if (password && !password.value.trim()) {
-                        e.preventDefault();
-                        password.focus();
-                        password.style.borderColor = '#f87171';
-                        setTimeout(() => {
-                            password.style.borderColor = '';
-                        }, 3000);
-                        return;
                     }
                 });
             }
