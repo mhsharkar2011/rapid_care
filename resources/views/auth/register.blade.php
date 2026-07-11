@@ -669,7 +669,7 @@
             @endif
 
             <!-- Form -->
-            <form class="register-form" action="{{ route('frontEnd.register.store') }}" method="POST">
+            <form class="register-form" action="{{ route('admin.register.store') }}" method="POST">
                 @csrf
 
                 <!-- Name Field -->
@@ -755,7 +755,7 @@
                         <span>or</span>
                     </div>
 
-                    <a href="{{ route('frontEnd.login') }}" class="btn-secondary-custom">
+                    <a href="{{ route('admin.login') }}" class="btn-secondary-custom">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
                             <polyline points="10 17 15 12 10 7"/>
@@ -768,7 +768,7 @@
 
             <!-- Footer -->
             <div class="register-footer">
-                <p>&copy; {{ date('Y') }} <a href="{{ route('frontEnd.home') }}">Rapid Care</a>. All rights reserved.</p>
+                <p>&copy; {{ date('Y') }} <a href="{{ route('admin.dashboard') }}">Rapid Care</a>. All rights reserved.</p>
             </div>
         </div>
     </div>

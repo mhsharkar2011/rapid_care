@@ -329,7 +329,7 @@
                             <span class="text-white font-medium">8:00am - 5:00pm</span>
                         </div>
                     </div>
-                    <a href="#" class="mt-4 inline-block w-full text-center px-4 py-2 bg-white/5 border border-white/10 text-gray-300 text-sm font-medium rounded-lg hover:bg-white/10 hover:text-white transition-all">
+                    <a href="{{ route('admin.appointments.create') }}" class="mt-4 inline-block w-full text-center px-4 py-2 bg-white/5 border border-white/10 text-gray-300 text-sm font-medium rounded-lg hover:bg-white/10 hover:text-white transition-all">
                         Book Appointment
                     </a>
                 </div>

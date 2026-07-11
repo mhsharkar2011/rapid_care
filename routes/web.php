@@ -17,31 +17,31 @@ Route::group(['namespace' => 'App\Http\Controllers'], function() {
         return view('index');
     })->name('index');
 
-    Route::prefix('frontEnd')->name('frontEnd.')->group(function () {
-        // Authentication - Public
-        Route::get('login', 'AuthController@login')->name('login');
-        Route::post('login', 'AuthController@store')->name('login.store');
-        Route::get('register', 'AuthController@register')->name('register');
-        Route::post('register', 'AuthController@registerStore')->name('register.store');
-        Route::get('logout', 'AuthController@logout')->name('logout');
+    // Route::prefix('frontEnd')->name('frontEnd.')->group(function () {
+    //     // Authentication - Public
+    //     Route::get('login', 'AuthController@login')->name('login');
+    //     Route::post('login', 'AuthController@store')->name('login.store');
+    //     Route::get('register', 'AuthController@register')->name('register');
+    //     Route::post('register', 'AuthController@registerStore')->name('register.store');
+    //     Route::get('logout', 'AuthController@logout')->name('logout');
 
-        // Pages
-        Route::get('about', 'frontEndController@about')->name('about');
-        Route::get('doctors', 'frontEndController@doctors')->name('doctors');
-        Route::get('services', 'frontEndController@services')->name('services');
-        Route::get('patients', 'frontEndController@patients')->name('patients');
-        Route::get('contact', 'frontEndController@showContact')->name('showContact');
-        Route::post('contact', 'frontEndController@storeContact')->name('storeContact');
+        // // Pages
+        // Route::get('about', 'frontEndController@about')->name('about');
+        // Route::get('doctors', 'frontEndController@doctors')->name('doctors');
+        // Route::get('services', 'frontEndController@services')->name('services');
+        // Route::get('patients', 'frontEndController@patients')->name('patients');
+        // Route::get('contact', 'frontEndController@showContact')->name('showContact');
+        // Route::post('contact', 'frontEndController@storeContact')->name('storeContact');
 
-        // Authenticated Frontend Routes
-        Route::group(['middleware' => ['auth']], function() {
-            Route::get('appointments', 'AppointmentController@index')->name('appointments.index');
-            Route::put('appointments/{appointment}/update-status', 'AppointmentController@updateStatus')->name('appointments.update-status');
-            Route::get('appointments/create', 'AppointmentController@create')->name('appointments.create');
-            Route::post('appointments/store', 'AppointmentController@store')->name('appointments.store');
-            Route::get('appointments/{id}', 'AppointmentController@show')->name('appointments.show');
-        });
-    });
+        // // Authenticated Frontend Routes
+        // Route::group(['middleware' => ['auth']], function() {
+        //     Route::get('appointments', 'AppointmentController@index')->name('appointments.index');
+        //     Route::put('appointments/{appointment}/update-status', 'AppointmentController@updateStatus')->name('appointments.update-status');
+        //     Route::get('appointments/create', 'AppointmentController@create')->name('appointments.create');
+        //     Route::post('appointments/store', 'AppointmentController@store')->name('appointments.store');
+        //     Route::get('appointments/{id}', 'AppointmentController@show')->name('appointments.show');
+        // });
+    // });
 
     // ============================================
     // BACKEND PUBLIC APIs
