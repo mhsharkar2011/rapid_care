@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Helpers;
 
 use Illuminate\Http\Request;
@@ -15,7 +15,7 @@ class Helper
 function PageLimit($page)
     {
         $pageLimit = request()->per_page ?? $page;
-        return $pageLimit; 
+        return $pageLimit;
     }
 
 if (!function_exists('calculateAutoIncrementIndex')) {
@@ -25,4 +25,3 @@ if (!function_exists('calculateAutoIncrementIndex')) {
 
         }
     }
-    
