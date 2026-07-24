@@ -805,7 +805,7 @@
 
             <!-- Footer -->
             <div class="login-footer">
-                <p>&copy; {{ date('Y') }} <a href="{{ route('frontEnd.home') }}">Rapid Care</a>. All rights reserved.</p>
+                <p>&copy; {{ date('Y') }} <a href="{{ route('index') }}">Rapid Care</a>. All rights reserved.</p>
             </div>
         </div>
     </div>
