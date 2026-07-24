@@ -18,6 +18,13 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(2)->create();
+        DB::table('users')->insert([
+            'name' => 'Admin',
+            'email' => 'admin@mail.com',
+            'password' => Hash::make('password'),
+            'role' => 'admin',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]); 
     }
 }
